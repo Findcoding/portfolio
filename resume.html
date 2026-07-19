@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bijendar Prasad - Resume</title>
+    <meta name="description" content="Resume of Bijendar Prasad, SRE/DevOps Engineer at Jio Platforms Limited.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #475569;
+            --accent-color: #0284c7;
+            --border-color: #e2e8f0;
+            --bg-light: #f8fafc;
+            --text-color: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.5;
+            padding: 40px 20px;
+        }
+
+        .no-print-bar {
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .print-btn {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+
+        .print-btn:hover {
+            opacity: 0.9;
+        }
+
+        .resume-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 45px 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .contact-info a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .social-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .summary-text {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            text-align: justify;
+        }
+
+        .education-item, .job-item, .project-item {
+            margin-bottom: 20px;
+        }
+
+        .job-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .item-subheader {
+            display: flex;
+            justify-content: space-between;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+
+        .item-bullets {
+            list-style-type: disc;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .item-bullets li {
+            margin-bottom: 5px;
+            text-align: justify;
+        }
+
+        .skills-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .skills-table tr {
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .skills-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .skills-table td {
+            padding: 6px 0;
+            vertical-align: top;
+        }
+
+        .skills-label {
+            font-weight: 600;
+            width: 25%;
+            color: var(--primary-color);
+        }
+
+        .skills-values {
+            width: 75%;
+            color: var(--text-color);
+        }
+
+        .achievement-item {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        /* Print Media Styles */
+        @media print {
+            body {
+                background-color: #ffffff;
+                padding: 0;
+            }
+
+            .no-print-bar {
+                display: none;
+            }
+
+            .resume-page {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .item-header {
+                font-size: 0.95rem;
+            }
+
+            .item-subheader {
+                font-size: 0.85rem;
+            }
+
+            .item-bullets {
+                font-size: 0.85rem;
+            }
+
+            .skills-table {
+                font-size: 0.85rem;
+            }
+            
+            section {
+                margin-bottom: 18px;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Utility Bar (hidden during printing) -->
+    <div class="no-print-bar">
+        <a href="index.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Back to Portfolio Dashboard
+        </a>
+        <button onclick="window.print()" class="print-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Print / Save PDF
+        </button>
+    </div>
+
+    <!-- Printable Resume Canvas -->
+    <div class="resume-page">
+        <header>
+            <h1>Bijendar Prasad</h1>
+            
+            <div class="contact-info">
+                <span><a href="mailto:prasadbijendar7@gmail.com">prasadbijendar7@gmail.com</a></span>
+                <span>•</span>
+                <span><a href="mailto:prasadbijendar@outlook.com">prasadbijendar@outlook.com</a></span>
+                <span>•</span>
+                <span>+91 8130630988</span>
+                <span>•</span>
+                <span>Delhi, India</span>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/bijendar-prasad-8447861b9/" target="_blank" rel="noopener">LinkedIn</a>
+                <span>|</span>
+                <a href="https://github.com/Findcoding" target="_blank" rel="noopener">GitHub</a>
+                <span>|</span>
+                <a href="https://leetcode.com/FiindingDeadlock/" target="_blank" rel="noopener">Leetcode</a>
+            </div>
+        </header>
+
+        <!-- Summary -->
+        <section>
+            <div class="section-title">Summary</div>
+            <div class="summary-text">
+                SRE/DevOps Engineer with 2.5+ years of experience designing and automating highly available, cloud-native, distributed systems across AWS, Azure, and GCP. Skilled in CI/CD, Kubernetes, Infrastructure as Code, observability, system reliability, and end-to-end automation. Strong focus on reducing deployment time, improving system uptime, and scaling production workloads.
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+            <div class="section-title">Education</div>
+            <div class="education-item">
+                <div class="item-header">
+                    <span>Indraprastha Institute of Information Technology Delhi (IIITD)</span>
+                    <span>Delhi, India</span>
+                </div>
+                <div class="item-subheader">
+                    <span>B.Tech in Computer Science and Applied Mathematics (CSAM)</span>
+                    <span>August 2019 – June 2023</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section>
+            <div class="section-title">Experience</div>
+            
+            <!-- Jio Platforms -->
+            <div class="job-item">
+                <div class="item-header">
+                    <span>Jio Platforms Limited</span>
+                    <span>June 2023 – Present</span>
+                </div>
+                
+                <!-- DLT -->
+                <div style="margin-top: 8px;">
+                    <div class="item-subheader" style="margin-bottom: 4px;">
+                        <strong>Jio-DLT</strong>
+                        <span>November 2024 – June 2025</span>
+                    </div>
+                    <ul class="item-bullets">
+                        <li>Deployed scalable Hyperledger Fabric network across 20+ servers using Docker Swarm, ensuring high availability with 3 Orderers (RAFT), 4 channels, 12 peers and persistent ledger storage.</li>
+                        <li>Orchestrated Fabric operations with 30+ scripts for genesis block creation, channel setup, and chaincode lifecycle (approved, commit, & invoke), reducing deployment time by 80%.</li>
+                        <li>Enhanced transaction throughput by 40% through tuning configtx.yaml, orderer.yaml & core.yaml, enforcing log rotation, and configuring NFS for shared certificates/blocks.</li>
+                        <li>Increased fault tolerance by 50% by simulating node failures, implementing distributed consensus mechanisms, and mounting ledger data for zero-downtime recovery.</li>
+                        <li>Implemented monitoring using Prometheus, Grafana, and cAdvisor for real-time tracking of 50+ containers.</li>
+                        <li>Improved blockchain data transparency by deploying Hyperledger Explorer with PostgreSQL, allowing seamless querying and visualization of over 20,000+ transactions across multiple channels.</li>
+                    </ul>
+                </div>
+                
+                <!-- Energy -->
+                <div style="margin-top: 12px;">
+                    <div class="item-subheader" style="margin-bottom: 4px;">
+                        <strong>Jio-Energy</strong>
+                        <span>March 2024 – August 2024</span>
+                    </div>
+                    <ul class="item-bullets">
+                        <li>Released Node.js & Angular apps in Kubernetes, using Deployments, Services, ConfigMaps, Secrets, HPA, PDB, and liveness/readiness probes to achieve 99.99% uptime and zero-downtime updates.</li>
+                        <li>Engineered CI/CD pipelines via multi-stage Docker, JFrog, and security scans (BlackDuck/Fortify), cutting manual effort by 80%.</li>
+                        <li>Enabled disaster recovery for MongoDB, Redis, and MySQL clusters using K8s CronJobs, reducing backup failures by 40% and ensuring RPO &lt; 5 mins.</li>
+                        <li>Monitored clusters using Prometheus + Grafana with 4 custom exporters (Node, MySQL, MongoDB, Redis) and improved traffic with Nginx (rate limiting, LB, & path-based routings).</li>
+                        <li>Reduced vulnerabilities by 30% via SonarQube, Keycloak auth, and pipeline scans.</li>
+                        <li>Configured Azure Load Balancer/API Gateway to efficiently distribute traffic and improve application availability by 90%.</li>
+                    </ul>
+                </div>
+
+                <!-- Games -->
+                <div style="margin-top: 12px;">
+                    <div class="item-subheader" style="margin-bottom: 4px;">
+                        <strong>Jio-Games</strong>
+                        <span>January 2024 – March 2024</span>
+                    </div>
+                    <ul class="item-bullets">
+                        <li>Launched Metabase on production using MySQL and Java, configured RBAC for dashboard security, and refined dashboards, reducing query latency by 40%.</li>
+                        <li>Orchestrated migration of 300+ PowerBI dashboards to Metabase, converting 100+ DAX queries to SQL and improving execution speed by 35% while cutting ad-hoc query time by 50%.</li>
+                        <li>Built Airflow pipelines for scheduled MySQL ingestion and organized Logstash ETL for ELK-to-MySQL sync, increasing data reliability by 30%.</li>
+                    </ul>
+                </div>
+
+                <!-- Krishi -->
+                <div style="margin-top: 12px;">
+                    <div class="item-subheader" style="margin-bottom: 4px;">
+                        <strong>Jio-Krishi</strong>
+                        <span>September 2023 – January 2024</span>
+                    </div>
+                    <ul class="item-bullets">
+                        <li>Automated CI/CD pipelines with Azure Pipelines and Ansible to deploy Kafka and Zookeeper across multi-server environments, ensuring high availability, scalability, and 95% deployment consistency.</li>
+                        <li>Secured Kafka with SASL (JAAS) and ACLs to enforce access control and unauthorized access incidents by 90%.</li>
+                        <li>Streamlined ELK/MongoDB/Cassandra pipelines, reducing failures by 30% in multi-cloud setups.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills -->
+        <section>
+            <div class="section-title">Technical Skills</div>
+            <table class="skills-table">
+                <tr>
+                    <td class="skills-label">Languages:</td>
+                    <td class="skills-values">Java, Python, JavaScript, Bash</td>
+                </tr>
+                <tr>
+                    <td class="skills-label">Frameworks:</td>
+                    <td class="skills-values">Django, Flask, React, Angular, Node.js</td>
+                </tr>
+                <tr>
+                    <td class="skills-label">CI/CD & DevOps:</td>
+                    <td class="skills-values">GitHub Actions, GitLab CI/CD, Azure DevOps Pipelines, Jenkins, ArgoCD, JFrog</td>
+                </tr>
+                <tr>
+                    <td class="skills-label">Cloud Platforms:</td>
+                    <td class="skills-values">
+                        AWS (EC2, EKS, ECS, Lambda, VPC, IAM, S3, CloudWatch, ALB/NLB, API Gateway, Route53, WAF)<br>
+                        Azure (AKS, VMs, VNet, Subnets, Load Balancer, API Management, Storage Accounts)<br>
+                        GCP (GCE, GKE, VPC, Cloud Storage, OpenShift)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="skills-label">Containers:</td>
+                    <td class="skills-values">Docker, Kubernetes, Helm, Docker Swarm, Nginx Ingress</td>
+                </tr>
+                <tr>
+                    <td class="skills-label">IaC & Automation:</td>
+                    <td class="skills-values">Terraform, Ansible, Puppet, Chef</td>
+                </tr>
+                <tr>
+                    <td class="skills-label">Observability:</td>
+                    <td class="skills-values">Prometheus, Grafana, ELK Stack, OpenSearch, CloudWatch, cAdvisor</td>
+                </tr>
+                <tr>
+                    <td class="skills-label">Security:</td>
+                    <td class="skills-values">SonarQube, Fortify, BlackDuck, Keycloak, Vault</td>
+                </tr>
+                <tr>
+                    <td class="skills-label">Data & Streaming:</td>
+                    <td class="skills-values">Kafka, Spark, Hadoop, Airflow, ETL pipelines</td>
+                </tr>
+                <tr>
+                    <td class="skills-label">Databases:</td>
+                    <td class="skills-values">MySQL, PostgreSQL, MongoDB, Cassandra, Redis</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Projects -->
+        <section>
+            <div class="section-title">Projects</div>
+            
+            <div class="project-item">
+                <div class="item-header">
+                    <span>B.TECH PROJECT - Student Claim Workflow System</span>
+                    <span>August 2021 – March 2023</span>
+                </div>
+                <ul class="item-bullets">
+                    <li>Built the Student Claim Process workflow system to regulate various claims at the institute, integrating requirements from 10+ departments into a single adaptive workflow.</li>
+                    <li>Developed the backend using Django, managing the database with Django Models, and implementing Role-Based Access Control (RBAC) for 500+ user types to ensure security and business logic isolation.</li>
+                    <li><strong>Technologies Used:</strong> Django, AWS, MySQL, Docker, Nginx, HTML, CSS, JavaScript</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <div class="item-header">
+                    <span>IIIT-DRIVE - Secure Cloud Storage Portal</span>
+                    <span>August 2022 – December 2022</span>
+                </div>
+                <ul class="item-bullets">
+                    <li>Created a Google Drive prototype with core features like upload (100MB/file limit), share (50+ files shared daily), delete (auto-deletes after 7 days), and download, with IIITD email verification.</li>
+                    <li>Designed user profiles with social media integration (GitHub, LinkedIn) for 30% of users, a file starring feature, email notifications for file sharing, and an admin dashboard for moderation.</li>
+                    <li><strong>Technologies Used:</strong> Django, AWS S3, Docker, Kubernetes</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section>
+            <div class="section-title">Achievements</div>
+            <div class="achievement-item">• Solved 500+ data structures and algorithms problems on LeetCode, GFG, InterviewBit, and HackerRank.</div>
+            <div class="achievement-item">• Secured 2613th place in CodeChef Starters 43 Division 4 Contest.</div>
+        </section>
+    </div>
+
+</body>
+</html>
