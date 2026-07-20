@@ -117,6 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. Interactive Terminal Setup
     initTerminal();
+
+    // 5. Antigravity Mouse Move Particles
+    initAntigravityParticles();
 });
 
 // Run pipeline logs typing animation simulation
@@ -188,10 +191,11 @@ function initTerminal() {
     const commandResponses = {
         'help': `Available Commands:
   <span class="term-highlight">about</span>     - Print biography and background summary
-  <span class="term-highlight">skills</span>    - Print complete technical catalog and tools
+  <span class="term-highlight">skills</span>    - Print technical catalog in a tree structure
   <span class="term-highlight">pipeline</span>  - View operational status of Jio deployment stages
-  <span class="term-highlight">projects</span>  - Review core code repositories and cloud architectures
-  <span class="term-highlight">contact</span>   - Print email address, LinkedIn, and social tags
+  <span class="term-highlight">projects</span>  - Review core code repositories in a tree structure
+  <span class="term-highlight">contact</span>   - Print social handles registry in a tree structure
+  <span class="term-highlight">tree</span>      - Display current portfolio workspace structure
   <span class="term-highlight">uptime</span>    - Query live system availability score
   <span class="term-highlight">date</span>      - Print environment timestamps
   <span class="term-highlight">clear</span>     - Clear shell window logs
@@ -204,37 +208,70 @@ Bio:  B.Tech graduate in Computer Science & Applied Mathematics from IIIT-Delhi.
       Passionate SRE focusing on automation, cloud migration, performance optimization, 
       infrastructure compliance, and zero-downtime cluster lifecycle rules.`,
         
-        'skills': `--- TECHNICAL INVENTORY CATALOG ---
-Languages:   Java, Python, JavaScript, Bash Scripting
-Platforms:   AWS (EC2, EKS, ECS, Lambda, VPC, Route53, S3, IAM, WAF)
-             Azure (AKS, VMs, VNet, Load Balancers, API Gateways)
-             GCP (GCE, GKE, VPC, Cloud Storage, OpenShift)
-Containers:  Kubernetes, Docker, Helm, Docker Swarm, Nginx Ingress
-IaC/CI-CD:   Terraform, Ansible, GitHub Actions, GitLab CI/CD, Azure Pipelines, Jenkins
-Observability:Prometheus, Grafana, ELK Stack (Elasticsearch, Logstash, Kibana), OpenSearch
-Data/Stream: Kafka, Spark, Hadoop, Airflow, ETL pipelines
-Security:    SonarQube, Vault, Keycloak, BlackDuck, Fortify`,
+        'skills': `skills
+├── Languages
+│   ├── Java
+│   ├── Python
+│   ├── JavaScript
+│   └── Bash Scripting
+├── Cloud Platforms
+│   ├── AWS (EC2, EKS, ECS, Lambda, VPC, IAM, S3, Route53, WAF)
+│   ├── Azure (AKS, VMs, VNet, Load Balancers, API Management)
+│   └── GCP (GCE, GKE, VPC, Cloud Storage, OpenShift)
+├── Containers & Orchestration
+│   ├── Kubernetes
+│   ├── Docker (Swarm)
+│   ├── Helm
+│   └── Nginx Ingress
+├── IaC & DevOps
+│   ├── Terraform
+│   ├── Ansible
+│   ├── GitHub Actions / GitLab CI-CD / Azure Pipelines
+│   └── Jenkins / ArgoCD / JFrog
+├── Observability & Security
+│   ├── Prometheus & Grafana
+│   ├── ELK Stack / OpenSearch
+│   └── SonarQube / Vault / Keycloak / BlackDuck / Fortify
+└── Databases & Streaming
+    ├── MySQL / PostgreSQL / MongoDB
+    ├── Redis / Cassandra
+    └── Kafka / Spark / Airflow`,
         
-        'pipeline': `Jio Platforms Limited Deployment Pipelines:
-  [PASS] Stage 1: Jio-DLT (Nov 2024 - Jun 2025) - Fabric deployment on Docker Swarm
-  [PASS] Stage 2: Jio-Energy (Mar 2024 - Aug 2024) - K8s Node/Angular deployments
-  [PASS] Stage 3: Jio-Games (Jan 2024 - Mar 2024) - Metabase DB Migration & Airflow ETLs
-  [PASS] Stage 4: Jio-Krishi (Sep 2023 - Jan 2024) - Kafka cluster security & Ansible IaC`,
+        'pipeline': `pipeline
+└── Jio Platforms Limited (June 2023 - Present)
+    ├── [PASS] Jio-DLT (Nov 2024 - Jun 2025)
+    │    └── SRE & Ledger Operations (Fabric, Swarm, RAFT, Prometheus)
+    ├── [PASS] Jio-Energy (Mar 2024 - Aug 2024)
+    │    └── DevOps Architecture (Kubernetes, Docker, Nginx, CI/CD)
+    ├── [PASS] Jio-Games (Jan 2024 - Mar 2024)
+    │    └── Data Ingestion Pipelines (Metabase, Airflow, Logstash)
+    └── [PASS] Jio-Krishi (Sep 2023 - Jan 2024)
+         └── Kafka Cluster Security & Automation (Ansible, ACLs)`,
         
-        'projects': `Active Portfolios:
-  1. Student Claim Process Workflow System
-     - Details: Django, AWS backend, MySQL engine, multi-role access configs.
-  2. IIIT-DRIVE Cloud Storage Engine
-     - Details: Google Drive clone, AWS S3 buckets, K8s scaling, auto-garbage collections.`,
+        'projects': `projects
+├── Student Claim Process Workflow System
+│   ├── Details: Django, AWS backend, MySQL engine, multi-role access configs.
+│   └── Link: <a href="https://repository.iiitd.edu.in/xmlui/handle/123456789/1125" target="_blank" style="color:var(--accent-blue);text-decoration:underline">repository.iiitd.edu.in/xmlui/handle/123456789/1125</a>
+└── IIIT-DRIVE Cloud Storage Engine
+    └── Details: Google Drive clone, AWS S3 buckets, K8s scaling, auto-garbage collections.`,
         
-        'contact': `Social Registry Handles:
-  LinkedIn:  <a href="https://www.linkedin.com/in/bijendar-prasad-8447861b9/" target="_blank" style="color:var(--accent-blue);text-decoration:underline">linkedin.com/in/bijendar-prasad-8447861b9/</a>
-  GitHub:    <a href="https://github.com/Findcoding" target="_blank" style="color:var(--accent-blue);text-decoration:underline">github.com/Findcoding</a>
-  Leetcode:  <a href="https://leetcode.com/FiindingDeadlock/" target="_blank" style="color:var(--accent-blue);text-decoration:underline">leetcode.com/FiindingDeadlock/</a>
-  DockerHub: <a href="https://hub.docker.com/u/findcoding" target="_blank" style="color:var(--accent-blue);text-decoration:underline">hub.docker.com/u/findcoding</a>
-  Twitter:   <a href="https://twitter.com/bijendarprasad" target="_blank" style="color:var(--accent-blue);text-decoration:underline">twitter.com/bijendarprasad</a>
-  Instagram: <a href="https://www.instagram.com/prasadbijendar?igsh=cnFjZGFsMzlwM3Mz" target="_blank" style="color:var(--accent-blue);text-decoration:underline">instagram.com/prasadbijendar</a>
-  Email:     <a href="mailto:prasadbijendar7@gmail.com" style="color:var(--accent-blue);text-decoration:underline">prasadbijendar7@gmail.com</a>`,
+        'contact': `contact
+├── Social Registry
+│   ├── LinkedIn:  <a href="https://www.linkedin.com/in/bijendar-prasad-8447861b9/" target="_blank" style="color:var(--accent-blue);text-decoration:underline">linkedin.com/in/bijendar-prasad-8447861b9/</a>
+│   ├── GitHub:    <a href="https://github.com/Findcoding" target="_blank" style="color:var(--accent-blue);text-decoration:underline">github.com/Findcoding</a>
+│   ├── Leetcode:  <a href="https://leetcode.com/FiindingDeadlock/" target="_blank" style="color:var(--accent-blue);text-decoration:underline">leetcode.com/FiindingDeadlock/</a>
+│   ├── DockerHub: <a href="https://hub.docker.com/u/findcoding" target="_blank" style="color:var(--accent-blue);text-decoration:underline">hub.docker.com/u/findcoding</a>
+│   ├── Twitter:   <a href="https://twitter.com/bijendarprasad" target="_blank" style="color:var(--accent-blue);text-decoration:underline">twitter.com/bijendarprasad</a>
+│   └── Instagram: <a href="https://www.instagram.com/prasadbijendar?igsh=cnFjZGFsMzlwM3Mz" target="_blank" style="color:var(--accent-blue);text-decoration:underline">instagram.com/prasadbijendar</a>
+└── Channels
+    └── Email:     <a href="mailto:prasadbijendar7@gmail.com" style="color:var(--accent-blue);text-decoration:underline">prasadbijendar7@gmail.com</a>`,
+        
+        'tree': `tree ./
+./
+├── index.html
+├── resume.html
+├── script.js
+└── style.css`,
         
         'uptime': () => {
             const upDays = Math.floor(Math.random() * 150) + 120;
@@ -301,4 +338,182 @@ Nice try. Safe protocols protected this portfolio from corruption. SRE failover 
             terminalScreen.scrollTop = terminalScreen.scrollHeight;
         }
     });
+}
+
+// Interactive Antigravity Particles Animation for Hero Background
+function initAntigravityParticles() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const heroSection = document.getElementById('home');
+    if (!heroSection) return;
+
+    let particles = [];
+    const particleCount = 50;
+    const connectionDistance = 115;
+    const repulsionRadius = 145;
+    const repulsionStrength = 2.2;
+    const gravityForce = -0.012; // Floating upwards
+    
+    let mouse = { x: null, y: null };
+    
+    // Resize handler
+    function resizeCanvas() {
+        const rect = heroSection.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Mouse tracking over hero area
+    heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+    
+    heroSection.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+    
+    // Particle Model
+    class Particle {
+        constructor() {
+            this.reset(true);
+        }
+        
+        reset(randomY = false) {
+            this.x = Math.random() * canvas.width;
+            this.y = randomY ? Math.random() * canvas.height : canvas.height + 10;
+            this.radius = Math.random() * 2.2 + 1.2;
+            
+            // Random slow velocity vectors
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.8) * 0.5;
+            
+            // Neon brand accents
+            const colors = [
+                'rgba(0, 242, 254, ',   // Cyan (Azure)
+                'rgba(157, 78, 221, ',  // Violet (K8s)
+                'rgba(255, 153, 0, '    // Orange (AWS)
+            ];
+            this.colorPrefix = colors[Math.floor(Math.random() * colors.length)];
+            this.alpha = Math.random() * 0.45 + 0.15;
+        }
+        
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            
+            // Velocity dampening
+            this.vx *= 0.98;
+            this.vy *= 0.98;
+            
+            // Constant upward drift
+            this.vy += gravityForce;
+            
+            // Gentle wave flow
+            this.vx += Math.sin((Date.now() / 800) + this.y * 0.015) * 0.004;
+            
+            // Repulsion physics (antigravity pushing effect)
+            if (mouse.x !== null && mouse.y !== null) {
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < repulsionRadius) {
+                    const force = (repulsionRadius - dist) / repulsionRadius;
+                    // Accelerate away from cursor
+                    this.vx += (dx / dist) * force * repulsionStrength;
+                    this.vy += (dy / dist) * force * repulsionStrength;
+                }
+            }
+            
+            // Reset at top, boundaries bounce
+            if (this.y < -15) {
+                this.reset(false);
+            }
+            if (this.x < 0) {
+                this.x = 0;
+                this.vx = -this.vx * 0.6;
+            } else if (this.x > canvas.width) {
+                this.x = canvas.width;
+                this.vx = -this.vx * 0.6;
+            }
+        }
+        
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `${this.colorPrefix}${this.alpha})`;
+            ctx.shadowBlur = 4;
+            ctx.shadowColor = `${this.colorPrefix}0.35)`;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+    
+    // Seed particle population
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+    
+    // Render loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Update & paint points
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+        
+        // Render network grid lines
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < connectionDistance) {
+                    const lineAlpha = (1.0 - (dist / connectionDistance)) * 0.12;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(0, 242, 254, ${lineAlpha})`;
+                    ctx.lineWidth = 0.75;
+                    ctx.stroke();
+                }
+            }
+        }
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // 3D Parallax Tilt effect on the Hero container content
+    const heroContainer = document.querySelector('.hero-container');
+    if (heroContainer) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const dx = (e.clientX - rect.left - cx) / cx;
+            const dy = (e.clientY - rect.top - cy) / cy;
+            
+            // Tilts up to 7 degrees, translates up to 8px
+            heroContainer.style.transform = `perspective(1000px) rotateY(${dx * 7}deg) rotateX(${-dy * 7}deg) translateZ(8px)`;
+            heroContainer.style.transition = 'none';
+        });
+        
+        heroSection.addEventListener('mouseleave', () => {
+            heroContainer.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0deg)';
+            heroContainer.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+        });
+    }
 }
