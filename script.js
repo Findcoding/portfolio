@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Antigravity Mouse Move Particles
     initAntigravityParticles();
+
+    // 6. Dynamic Certifications Loading
+    initCertifications();
 });
 
 // Run pipeline logs typing animation simulation
@@ -190,16 +193,32 @@ function initTerminal() {
 
     const commandResponses = {
         'help': `Available Commands:
-  <span class="term-highlight">about</span>     - Print biography and background summary
-  <span class="term-highlight">skills</span>    - Print technical catalog in a tree structure
-  <span class="term-highlight">pipeline</span>  - View operational status of Jio deployment stages
-  <span class="term-highlight">projects</span>  - Review core code repositories in a tree structure
-  <span class="term-highlight">contact</span>   - Print social handles registry in a tree structure
-  <span class="term-highlight">tree</span>      - Display current portfolio workspace structure
-  <span class="term-highlight">uptime</span>    - Query live system availability score
-  <span class="term-highlight">date</span>      - Print environment timestamps
-  <span class="term-highlight">clear</span>     - Clear shell window logs
-  <span class="term-highlight">sudo ...</span>   - Execute commands with administrative rights`,
+  <span class="term-highlight">about</span>          - Print biography and background summary
+  <span class="term-highlight">skills</span>         - Print technical catalog in a tree structure
+  <span class="term-highlight">certifications</span> - Print professional credentials in a tree structure
+  <span class="term-highlight">pipeline</span>       - View operational status of Jio deployment stages
+  <span class="term-highlight">projects</span>       - Review core code repositories in a tree structure
+  <span class="term-highlight">contact</span>        - Print social handles registry in a tree structure
+  <span class="term-highlight">tree</span>           - Display current portfolio workspace structure
+  <span class="term-highlight">uptime</span>         - Query live system availability score
+  <span class="term-highlight">date</span>           - Print environment timestamps
+  <span class="term-highlight">clear</span>          - Clear shell window logs
+  <span class="term-highlight">sudo ...</span>       - Execute commands with administrative rights`,
+        
+        'certifications': `certifications
+├── Top Highlights
+│   ├── Introduction to Data Structures & Algorithms in Java
+│   │    └── Verification: <a href="https://www.linkedin.com/learning/certificates/99501668359327ee8c4a2f248eb8a75c05dd28168b29ed224b9354264d38566a" target="_blank" style="color:var(--accent-blue);text-decoration:underline">verify ↗</a>
+│   ├── Create and Manage Cloud Resources
+│   │    └── Verification: <a href="https://www.cloudskillsboost.google/public_profiles/23594fa8-8c63-4d59-b0b8-178133f84a39/badges/3104503?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share" target="_blank" style="color:var(--accent-blue);text-decoration:underline">verify ↗</a>
+│   └── Photography Techniques: Light, Content, and Sharing
+│        └── Verification: <a href="https://www.coursera.org/account/accomplishments/certificate/M7JKZUL2K2MD" target="_blank" style="color:var(--accent-blue);text-decoration:underline">verify ↗</a>
+└── More Credentials (26 total)
+    ├── Java & Systems: 12 Learning certificates (Git, Linux, JDBC, MySQL, OOP)
+    ├── Language: Basic Spanish Specialization (5 certificates)
+    └── Creative: Photography Basics and Beyond Specialization (6 certificates)
+
+[Note: View details or expand all 29 licenses in the dashboard certifications panel above]`,
         
         'about': `Name: Bijendar Prasad (BIJΣПDΛЯ PЯΛƧΛD ＼⍩⃝／)
 Role: Site Reliability / DevOps Engineer
@@ -288,7 +307,12 @@ Bio:  B.Tech graduate in Computer Science & Applied Mathematics from IIIT-Delhi.
     terminalInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             const rawInput = terminalInput.value;
-            const command = rawInput.trim().toLowerCase();
+            let command = rawInput.trim().toLowerCase();
+            
+            // Map aliases to target certifications command
+            if (command === 'certs' || command === 'licenses') {
+                command = 'certifications';
+            }
             
             // Create command echo
             const echoDiv = document.createElement('div');
@@ -516,4 +540,98 @@ function initAntigravityParticles() {
             heroContainer.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
         });
     }
+}
+
+// Dynamic Certifications list loading from Book1.csv (Pre-scraped values)
+function initCertifications() {
+    const grid = document.getElementById('certifications-grid');
+    const toggleBtn = document.getElementById('toggle-certs-btn');
+    if (!grid || !toggleBtn) return;
+    
+    let certsExpanded = false;
+    
+    const certifications = [
+        // Top 3 selected by user
+        { name: "Introduction to Data Structures & Algorithms in Java", url: "https://www.linkedin.com/learning/certificates/99501668359327ee8c4a2f248eb8a75c05dd28168b29ed224b9354264d38566a", issuer: "LinkedIn Learning", badge: "☕" },
+        { name: "Create and Manage Cloud Resources", url: "https://www.cloudskillsboost.google/public_profiles/23594fa8-8c63-4d59-b0b8-178133f84a39/badges/3104503?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share", issuer: "Google Cloud", badge: "☁️" },
+        { name: "Photography Techniques: Light, Content, and Sharing", url: "https://www.coursera.org/account/accomplishments/certificate/M7JKZUL2K2MD", issuer: "Coursera (Michigan State University)", badge: "📷" },
+        
+        // Remaining 26 from Book1.csv
+        { name: "Git Essential Training: The Basics (2019)", url: "https://www.linkedin.com/learning/certificates/779ddc50df8553870a76f3a7230347d32bedb79c136b744231473cd212e125a3", issuer: "LinkedIn Learning", badge: "💻" },
+        { name: "Learning Linux Command Line (2018)", url: "https://www.linkedin.com/learning/certificates/c28f2b2579f3b4e8e4e65ba39c4a8908fdee4ab08e152c28009410f9dc2d0bda", issuer: "LinkedIn Learning", badge: "🐧" },
+        { name: "Programming Foundations: APIs and Web Services", url: "https://www.linkedin.com/learning/certificates/43e445938120287e9978dddce17b803722547d123a25c46f446334783c191040", issuer: "LinkedIn Learning", badge: "🔌" },
+        { name: "Building an Android App with Architecture Components", url: "https://www.linkedin.com/learning/certificates/6e462e40425de75138c21c7fe80e4267303416ad8bdaf82b2cb289b9ac2537c2", issuer: "LinkedIn Learning", badge: "🤖" },
+        { name: "Android Development Essential Training: App Architecture with Kotlin", url: "https://www.linkedin.com/learning/certificates/67f14f2f60ca31f852fcb8906a6e12110e72bf7e7d9421015723d81eca2aa5ab", issuer: "LinkedIn Learning", badge: "🤖" },
+        { name: "Programming Foundations: Algorithms", url: "https://www.linkedin.com/learning/certificates/164b04c3230ca97cc8e3fcf94e9061811cf959b62b79cd78fdd081cdfc36f534", issuer: "LinkedIn Learning", badge: "📊" },
+        { name: "Java: Database Integration with JDBC", url: "https://www.linkedin.com/learning/certificates/10bc68b26c0d60848ccd7b04d120c3274775b914c9b7028442025ae65fec9b84", issuer: "LinkedIn Learning", badge: "☕" },
+        { name: "Programming Foundations: Databases", url: "https://www.linkedin.com/learning/certificates/42b742aa8b85e2deebe57e7aca76fec02f9e75c528c2230ad3014bd784b83009", issuer: "LinkedIn Learning", badge: "🗄️" },
+        { name: "Java 8+ Essential Training: Objects and APIs", url: "https://www.linkedin.com/learning/certificates/223dbf6f44fa1896de54bc2f3cf72d63595214d6adc20c970e6c43c0171869ca", issuer: "LinkedIn Learning", badge: "☕" },
+        { name: "Java 8+ Essential Training: Syntax and Structure", url: "https://www.linkedin.com/learning/certificates/159a170052544ea7ca4171d2d1a60d41d7064764f777311ae0c847df185a6c1b", issuer: "LinkedIn Learning", badge: "☕" },
+        { name: "Learning Java Applications (2019)", url: "https://www.linkedin.com/learning/certificates/435d183965d12af173f753cecbd765f7d5f21069ad35cdcdb8355ac53f775c69", issuer: "LinkedIn Learning", badge: "☕" },
+        { name: "MySQL Essential Training", url: "https://www.linkedin.com/learning/certificates/b029c77f764caf6399c59e3152b0961225b57f85f1e36429abb900c3fa38ad37", issuer: "LinkedIn Learning", badge: "🐬" },
+        { name: "Learning Java (2018)", url: "https://www.linkedin.com/learning/certificates/b18bad8a83cc4fc6a45329764d615eaf256bb58901fe6289463e1d92f34791a1", issuer: "LinkedIn Learning", badge: "☕" },
+        { name: "Spanish Vocabulary Project", url: "https://www.coursera.org/account/accomplishments/certificate/FJCWY9SZSV86", issuer: "Coursera (UC Davis)", badge: "🇪🇸" },
+        { name: "Spanish Vocabulary: Sports, Travel, and the Home", url: "https://www.coursera.org/account/accomplishments/certificate/7X4YFZ46G5G9", issuer: "Coursera (UC Davis)", badge: "🇪🇸" },
+        { name: "Spanish Vocabulary: Careers and Social Events", url: "https://www.coursera.org/account/accomplishments/certificate/V29QAPM26UVU", issuer: "Coursera (UC Davis)", badge: "🇪🇸" },
+        { name: "Learn Spanish: Basic Spanish Vocabulary Specialization", url: "https://www.coursera.org/account/accomplishments/specialization/certificate/2X9LLXHM2U4S", issuer: "Coursera (UC Davis)", badge: "🇪🇸" },
+        { name: "Spanish Vocabulary: Cultural Experience", url: "https://www.coursera.org/account/accomplishments/certificate/TP6DPB7WZ62K", issuer: "Coursera (UC Davis)", badge: "🇪🇸" },
+        { name: "Spanish Vocabulary: Meeting People", url: "https://www.coursera.org/account/accomplishments/certificate/KVV57CNDJCPW", issuer: "Coursera (UC Davis)", badge: "🇪🇸" },
+        { name: "Algorithms on Graphs", url: "https://www.coursera.org/account/accomplishments/certificate/C4MY9WJT4A8F", issuer: "Coursera (UC San Diego & HSE University)", badge: "📊" },
+        { name: "Photography Capstone Project", url: "https://www.coursera.org/account/accomplishments/certificate/5LZQZJJ7NR95", issuer: "Coursera (Michigan State University)", badge: "📷" },
+        { name: "Principles of Photo Composition and Digital Image Post-Production", url: "https://www.coursera.org/account/accomplishments/certificate/NK4RLQYR4Y8C", issuer: "Coursera (Michigan State University)", badge: "📷" },
+        { name: "Algorithmic Toolbox", url: "https://www.coursera.org/account/accomplishments/certificate/JG2PE72HES8W", issuer: "Coursera (UC San Diego & HSE University)", badge: "📊" },
+        { name: "Cameras, Exposure, and Photography", url: "https://www.coursera.org/account/accomplishments/certificate/J2HJ79T823J6", issuer: "Coursera (Michigan State University)", badge: "📷" },
+        { name: "Camera Control", url: "https://www.coursera.org/account/accomplishments/certificate/G3PECHR8EMZV", issuer: "Coursera (Michigan State University)", badge: "📷" },
+        { name: "Photography Basics and Beyond: From Smartphone to DSLR Specialization", url: "https://www.coursera.org/account/accomplishments/specialization/certificate/SLBN2CJ8ECWJ", issuer: "Coursera (Michigan State University)", badge: "📷" }
+    ];
+    
+    function renderCerts(limit) {
+        grid.innerHTML = '';
+        const listToRender = certifications.slice(0, limit);
+        
+        listToRender.forEach((cert, idx) => {
+            const card = document.createElement('div');
+            card.className = 'certification-card';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(15px)';
+            card.style.transition = 'all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            card.innerHTML = `
+                <div class="cert-badge">${cert.badge}</div>
+                <div class="cert-info">
+                    <h3>
+                        <a href="${cert.url}" target="_blank" rel="noopener">${cert.name} ↗</a>
+                    </h3>
+                    <p class="cert-issuer">${cert.issuer}</p>
+                </div>
+            `;
+            
+            grid.appendChild(card);
+            
+            // Stagger animation timing
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, idx * 35);
+        });
+    }
+    
+    // Initial top 3 rendering
+    renderCerts(3);
+    
+    // Bind toggle event
+    toggleBtn.addEventListener('click', () => {
+        if (!certsExpanded) {
+            renderCerts(certifications.length);
+            toggleBtn.innerHTML = 'show less &larr;';
+            certsExpanded = true;
+        } else {
+            renderCerts(3);
+            toggleBtn.innerHTML = 'show all 29 licenses &rarr;';
+            certsExpanded = false;
+            
+            // Scroll smoothly back to section header
+            document.getElementById('certifications').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
 }
