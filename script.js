@@ -123,6 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Dynamic Certifications Loading
     initCertifications();
+
+    // 7. 3D Mouse Tracking Tilt Physics for Portfolio Cards
+    initInteractive3DTilt();
 });
 
 // Run pipeline logs typing animation simulation
@@ -240,7 +243,7 @@ function initTerminal() {
 
 [Note: View details or expand all 29 licenses in the dashboard certifications panel above]`,
 
-        'about': `Name: Bijendar Prasad (BIJΣПDΛЯ PЯΛƧΛD ＼⍩⃝／)
+        'about': `Name: Bijendar Prasad (BIJENDAR PRASAD ＼⍩⃝／)
 Role: Site Reliability / DevOps Engineer
 Exp:  2.5+ Years designing cloud-native distributed environments
 Bio:  B.Tech graduate in Computer Science & Applied Mathematics from IIIT-Delhi. 
@@ -657,5 +660,40 @@ function initCertifications() {
             // Scroll smoothly back to section header
             document.getElementById('certifications').scrollIntoView({ behavior: 'smooth' });
         }
+        initInteractive3DTilt();
     });
 }
+
+// 3D Mouse Tracking Tilt Physics for Portfolio Elements (Index Page)
+function initInteractive3DTilt() {
+    const tiltTargets = document.querySelectorAll('.dashboard-widget, .pipeline-stage, .skill-category, .project-card, .achievement-card, .education-card, .certification-card');
+    
+    tiltTargets.forEach(card => {
+        card.style.transformStyle = 'preserve-3d';
+        
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = 'transform 0.08s ease-out, border-color 0.3s ease, box-shadow 0.3s ease';
+        });
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Calculate tilt angle (-8 to 8 degrees)
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease, box-shadow 0.3s ease';
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+    });
+}
+

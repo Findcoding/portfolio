@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initCursorTracker();
     initCynxHoverPhysics();
+    initPortraitToggle();
     initFilterSystem();
     initLightboxModal();
 });
@@ -38,9 +39,15 @@ function initCursorTracker() {
 
 // Cynx.io-style 3D Mouse Tracking Tilt Physics
 function initCynxHoverPhysics() {
-    const cards = document.querySelectorAll('.art-card');
+    const cards = document.querySelectorAll('.art-card, .portrait-card');
     
     cards.forEach(card => {
+        card.style.transformStyle = 'preserve-3d';
+        
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = 'transform 0.08s ease-out, border-color 0.3s ease, box-shadow 0.3s ease';
+        });
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -49,16 +56,43 @@ function initCynxHoverPhysics() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            // Calculate tilt angle (-12 to 12 degrees)
-            const rotateX = ((y - centerY) / centerY) * -12;
-            const rotateY = ((x - centerX) / centerX) * 12;
+            // Calculate tilt angle (-8 to 8 degrees)
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
             
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
         });
         
         card.addEventListener('mouseleave', () => {
+            card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease, box-shadow 0.3s ease';
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
         });
+    });
+}
+
+// Dual Photographer Portrait Toggle Controller (me1.png vs me2.jpg)
+function initPortraitToggle() {
+    const btnLight = document.getElementById('btn-mode-light');
+    const btnDark = document.getElementById('btn-mode-dark');
+    const cardLight = document.getElementById('portrait-card-light');
+    const cardDark = document.getElementById('portrait-card-dark');
+
+    if (!btnLight || !btnDark || !cardLight || !cardDark) return;
+
+    btnLight.addEventListener('click', () => {
+        btnLight.classList.add('active');
+        btnDark.classList.remove('active');
+        cardLight.classList.add('focused');
+        cardDark.classList.remove('focused');
+        cardLight.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    btnDark.addEventListener('click', () => {
+        btnDark.classList.add('active');
+        btnLight.classList.remove('active');
+        cardDark.classList.add('focused');
+        cardLight.classList.remove('focused');
+        cardDark.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
 }
 
