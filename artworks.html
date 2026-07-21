@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIJENDAR PRASAD — Fine Art Photography & Visual Artworks</title>
+    <meta name="description" content="Fine art photography portfolio and visual artworks gallery by Bijendar Prasad. Featuring 17 curated photographs exploring light, geometry, and atmosphere.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="artworks.css">
+</head>
+<body>
+    <!-- Custom Follower Cursor Dot -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- Navigation Header -->
+    <header class="art-header">
+        <div class="header-container">
+            <a href="artworks.html" class="art-logo">
+                <span class="logo-title">BIJΣПDΛЯ</span>
+                <span class="logo-tag">/ ARTWORKS</span>
+            </a>
+            
+            <nav class="art-nav">
+                <a href="#hero" class="art-nav-link active">Exhibition</a>
+                <a href="#gallery" class="art-nav-link">Collection (17)</a>
+                <a href="#about" class="art-nav-link">About</a>
+                <a href="index.html" class="art-nav-btn">&larr; SRE Portfolio</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Landing Photo Hero Section -->
+    <section id="hero" class="art-hero">
+        <div class="hero-bg-wrapper">
+            <img src="photos/1 (1).jpg" alt="Main Landing Artwork by Bijendar Prasad" class="hero-main-photo" id="hero-photo">
+            <div class="hero-gradient-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-badge">FEATURED EXHIBITION &bull; COLLECTION 2026</div>
+            <h1 class="hero-main-title">
+                <span class="title-line">THE GEOMETRY OF</span>
+                <span class="title-line highlight-serif">LIGHT & SILENCE</span>
+            </h1>
+            <p class="hero-subtitle">
+                A visual anthology capturing perspective, atmosphere, and human spaces. Curated 17-piece photographic portfolio.
+            </p>
+            
+            <div class="hero-action-bar">
+                <a href="#gallery" class="explore-btn">
+                    <span>EXPLORE GALLERY</span>
+                    <span class="btn-arrow">&darr;</span>
+                </a>
+                <div class="hero-meta">
+                    <span class="meta-label">MAIN LANDING PIECE</span>
+                    <span class="meta-value">Photo #01 &bull; 35mm Frame</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-down-hint">
+            <span class="line"></span>
+            <span class="text">SCROLL TO EXAMINE</span>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="art-gallery-section">
+        <div class="gallery-container">
+            
+            <!-- Gallery Header & Controls -->
+            <div class="gallery-header-block">
+                <div class="header-left">
+                    <span class="section-tag">// CURATED WORKS</span>
+                    <h2 class="gallery-title">PHOTOGRAPHIC COLLECTION</h2>
+                </div>
+                
+                <!-- Category Filter Pills -->
+                <div class="filter-bar">
+                    <button class="filter-pill active" data-filter="all">All Works (17)</button>
+                    <button class="filter-pill" data-filter="landscape">Landscapes</button>
+                    <button class="filter-pill" data-filter="urban">Urban & Geometry</button>
+                    <button class="filter-pill" data-filter="light">Light & Shadow</button>
+                    <button class="filter-pill" data-filter="portrait">Atmospherics</button>
+                </div>
+            </div>
+
+            <!-- Staggered Editorial Gallery Grid (Cynx.io-style mouse tracking hover physics) -->
+            <div class="gallery-grid" id="gallery-grid">
+
+                <!-- Photo Card 1 (Main Feature) -->
+                <div class="art-card grid-size-large" data-category="light" data-index="1" data-title="Luminous Horizons" data-location="New Delhi, India">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (1).jpg" alt="Artwork 01" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">01 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Luminous Horizons</h3>
+                                <p class="photo-meta">35mm &bull; Exhibition Mainpiece</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 2 -->
+                <div class="art-card grid-size-tall" data-category="urban" data-index="2" data-title="Architectural Solitude" data-location="Delhi NCR">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (2).jpg" alt="Artwork 02" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">02 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Architectural Solitude</h3>
+                                <p class="photo-meta">Digital &bull; Monochromatic Depth</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 3 -->
+                <div class="art-card grid-size-normal" data-category="landscape" data-index="3" data-title="Transient Shadows" data-location="Himalayas">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (3).jpg" alt="Artwork 03" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">03 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Transient Shadows</h3>
+                                <p class="photo-meta">High Contrast &bull; Mountain Light</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 4 -->
+                <div class="art-card grid-size-wide" data-category="portrait" data-index="4" data-title="Silent Reflections" data-location="India">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (4).jpg" alt="Artwork 04" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">04 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Silent Reflections</h3>
+                                <p class="photo-meta">Atmospheric Study &bull; Golden Hour</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 5 -->
+                <div class="art-card grid-size-normal" data-category="urban" data-index="5" data-title="Urban Geometry" data-location="New Delhi">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (5).jpg" alt="Artwork 05" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">05 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Urban Geometry</h3>
+                                <p class="photo-meta">Structural Form &bull; Perspective</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 6 -->
+                <div class="art-card grid-size-tall" data-category="light" data-index="6" data-title="Chiaroscuro Paths" data-location="IIIT-Delhi Campus">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (6).jpg" alt="Artwork 06" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">06 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Chiaroscuro Paths</h3>
+                                <p class="photo-meta">Light & Shadow Play</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 7 -->
+                <div class="art-card grid-size-large" data-category="landscape" data-index="7" data-title="Ethereal Vistas" data-location="Northern Plains">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (7).jpg" alt="Artwork 07" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">07 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Ethereal Vistas</h3>
+                                <p class="photo-meta">Wide Angle &bull; Mist & Air</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 8 -->
+                <div class="art-card grid-size-normal" data-category="portrait" data-index="8" data-title="Contemplation" data-location="Studio Series">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (8).jpg" alt="Artwork 08" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">08 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Contemplation</h3>
+                                <p class="photo-meta">Human Expressions & Mood</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 9 -->
+                <div class="art-card grid-size-wide" data-category="urban" data-index="9" data-title="Lines of Convergence" data-location="Metro Architecture">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (9).jpg" alt="Artwork 09" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">09 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Lines of Convergence</h3>
+                                <p class="photo-meta">Symmetry & Modern Concrete</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 10 -->
+                <div class="art-card grid-size-normal" data-category="light" data-index="10" data-title="Prismatic Dawn" data-location="Wilderness">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (10).jpg" alt="Artwork 10" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">10 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Prismatic Dawn</h3>
+                                <p class="photo-meta">Sunflare & Natural Hue</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 11 -->
+                <div class="art-card grid-size-tall" data-category="landscape" data-index="11" data-title="Ridge Line Reverie" data-location="Mountain Trails">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (11).jpg" alt="Artwork 11" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">11 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Ridge Line Reverie</h3>
+                                <p class="photo-meta">Altitude & Horizon</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 12 -->
+                <div class="art-card grid-size-large" data-category="urban" data-index="12" data-title="Structure & Void" data-location="Capital Region">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (12).jpg" alt="Artwork 12" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">12 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Structure & Void</h3>
+                                <p class="photo-meta">Minimalist Frame</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 13 -->
+                <div class="art-card grid-size-normal" data-category="light" data-index="13" data-title="Spectrum in Shadows" data-location="Urban Night">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (13).jpg" alt="Artwork 13" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">13 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Spectrum in Shadows</h3>
+                                <p class="photo-meta">Low Light Photography</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 14 -->
+                <div class="art-card grid-size-wide" data-category="portrait" data-index="14" data-title="Ephemeral Motion" data-location="Street Series">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (14).jpg" alt="Artwork 14" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">14 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Ephemeral Motion</h3>
+                                <p class="photo-meta">Shutter Speed & Flow</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 15 -->
+                <div class="art-card grid-size-normal" data-category="landscape" data-index="15" data-title="Serenade of Pines" data-location="Forest Preserve">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (15).jpg" alt="Artwork 15" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">15 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Serenade of Pines</h3>
+                                <p class="photo-meta">Organic Textures</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 16 -->
+                <div class="art-card grid-size-tall" data-category="urban" data-index="16" data-title="Urban Monolith" data-location="City Center">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (16).jpg" alt="Artwork 16" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">16 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Urban Monolith</h3>
+                                <p class="photo-meta">Vertical Perspective</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo Card 17 -->
+                <div class="art-card grid-size-large" data-category="light" data-index="17" data-title="Dusk Horizons" data-location="Twilight Study">
+                    <div class="card-inner">
+                        <div class="image-wrapper">
+                            <img src="photos/1 (17).jpg" alt="Artwork 17" loading="lazy">
+                        </div>
+                        <div class="card-overlay">
+                            <div class="card-badge">17 / 17</div>
+                            <div class="card-info">
+                                <h3 class="photo-title">Dusk Horizons</h3>
+                                <p class="photo-meta">Blue Hour & Gradient Sky</p>
+                            </div>
+                            <span class="view-prompt">VIEW FULL &nearr;</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Artist Bio / Statement Section -->
+    <section id="about" class="artist-statement-section">
+        <div class="statement-container">
+            <div class="statement-header">
+                <span class="section-tag">// THE PHOTOGRAPHER</span>
+                <h2 class="statement-title">BIJENDAR PRASAD</h2>
+                <p class="statement-sub">Site Reliability Engineer & Fine Art Photographer based in Delhi, India.</p>
+            </div>
+            
+            <div class="statement-content">
+                <div class="statement-quote">
+                    &ldquo;Photography is the art of capturing silent dialogues between light, architecture, and atmosphere before the moment dissipates.&rdquo;
+                </div>
+                <p class="statement-body">
+                    When I am not engineering high-availability cloud infrastructure and distributed ledger networks, I explore visual storytelling through fine art photography. My work emphasizes symmetry, geometrical minimalism, high-contrast natural lighting, and the quiet intimacy of human environments.
+                </p>
+                
+                <div class="artist-meta-grid">
+                    <div class="art-meta-card">
+                        <span class="num">17</span>
+                        <span class="label">Featured Artworks</span>
+                    </div>
+                    <div class="art-meta-card">
+                        <span class="num">35mm</span>
+                        <span class="label">Primary Medium</span>
+                    </div>
+                    <div class="art-meta-card">
+                        <span class="num">100%</span>
+                        <span class="label">Original Shots</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full-Screen Interactive Lightbox Modal -->
+    <div class="lightbox-modal" id="lightbox-modal">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close Lightbox">&times;</button>
+        
+        <button class="lightbox-nav nav-prev" id="lightbox-prev" aria-label="Previous Image">&larr;</button>
+        <button class="lightbox-nav nav-next" id="lightbox-next" aria-label="Next Image">&rarr;</button>
+
+        <div class="lightbox-content">
+            <div class="lightbox-image-container">
+                <img src="" alt="Fullscreen Artwork" id="lightbox-img">
+            </div>
+            <div class="lightbox-details">
+                <div class="lightbox-counter" id="lightbox-counter">01 / 17</div>
+                <h3 class="lightbox-title" id="lightbox-title">Title</h3>
+                <p class="lightbox-subtitle" id="lightbox-subtitle">Location &bull; Category</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Footer -->
+    <footer class="art-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>BIJΣПDΛЯ PЯΛƧΛD</h3>
+                <p>Fine Art Photography & Visual Fine Art &bull; Collection 2026</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#hero">Back to Top &uarr;</a>
+                <a href="index.html">SRE Portfolio Dashboard &rarr;</a>
+                <a href="mailto:prasadbijendar7@gmail.com">Inquiries & Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bijendar Prasad. All photographic rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS Link -->
+    <script src="artworks.js"></script>
+</body>
+</html>
