@@ -1235,7 +1235,7 @@ section {
     object-fit: contain;
 }
 
-.edu-icon.college-logo {
+.edu-icon.college-logo, .edu-icon.school-logo {
     background: #ffffff;
     border: 1px solid var(--border-color);
     padding: 4px;

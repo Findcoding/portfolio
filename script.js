@@ -54,13 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Mobile navigation toggle
     const toggleBtn = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('nav-links');
-    
+
     if (toggleBtn && navLinks) {
         toggleBtn.addEventListener('click', () => {
             navLinks.classList.toggle('nav-active');
             toggleBtn.classList.toggle('active');
         });
-        
+
         // Close menu on nav item click
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', () => {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         const sections = document.querySelectorAll('section');
         const navItems = document.querySelectorAll('.nav-item');
-        
+
         let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 current = section.getAttribute('id');
             }
         });
-        
+
         navItems.forEach(item => {
             item.classList.remove('active');
             if (item.getAttribute('href') === `#${current}`) {
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stage.addEventListener('click', () => {
             pipelineStages.forEach(s => s.classList.remove('active-stage'));
             stage.classList.add('active-stage');
-            
+
             const target = stage.getAttribute('data-target');
             runPipelineLogs(target);
         });
@@ -130,50 +130,50 @@ function runPipelineLogs(stageKey) {
     activeStage = stageKey;
     const outputDiv = document.getElementById('console-output');
     const titleText = document.getElementById('console-title-text');
-    
+
     if (!outputDiv || !titleText) return;
-    
+
     // Clear previous logs execution
     clearInterval(typingInterval);
     outputDiv.innerHTML = '';
-    
+
     const stageTitle = stageKey.replace('log-', 'Jio-').toUpperCase();
     titleText.textContent = `deployment-logs: ${stageTitle}`;
-    
+
     const lines = pipelineLogs[stageKey];
     if (!lines) return;
-    
+
     let index = 0;
-    
+
     // Print lines sequentially with dynamic offsets to simulate real console latency
     function printNextLine() {
         if (index >= lines.length) {
             clearInterval(typingInterval);
             return;
         }
-        
+
         const line = lines[index];
         const dateStr = new Date().toISOString().replace('T', ' ').substring(0, 19);
-        
+
         const lineDiv = document.createElement('div');
         lineDiv.className = index === (lines.length - 1) ? 'log-line log-success-final' : 'log-line';
-        
+
         // Assign color tags
         let tagClass = 'tag-info';
         if (line.type === 'success') tagClass = 'tag-success';
         if (line.type === 'action') tagClass = 'tag-action';
-        
+
         lineDiv.innerHTML = `<span class="log-timestamp">[${dateStr}]</span> <span class="log-tag ${tagClass}">[${line.type.toUpperCase()}]</span> ${line.text}`;
-        
+
         outputDiv.appendChild(lineDiv);
         outputDiv.scrollTop = outputDiv.scrollHeight;
-        
+
         index++;
     }
-    
+
     // Print first item immediately
     printNextLine();
-    
+
     // Schedule subsequent prints
     typingInterval = setInterval(printNextLine, 400);
 }
@@ -183,9 +183,9 @@ function initTerminal() {
     const terminalInput = document.getElementById('terminal-input');
     const terminalHistory = document.getElementById('terminal-history');
     const terminalScreen = document.getElementById('terminal-screen');
-    
+
     if (!terminalInput || !terminalHistory || !terminalScreen) return;
-    
+
     // Keep focus inside input when clicking inside the window
     terminalScreen.addEventListener('click', () => {
         terminalInput.focus();
@@ -194,9 +194,10 @@ function initTerminal() {
     const commandResponses = {
         'help': `Available Commands:
   <span class="term-highlight">about</span>          - Print biography and background summary
+  <span class="term-highlight">education</span>      - Display academic background and coursework tree
   <span class="term-highlight">skills</span>         - Print technical catalog in a tree structure
   <span class="term-highlight">certifications</span> - Print professional credentials in a tree structure
-  <span class="term-highlight">pipeline</span>       - View operational status of Jio deployment stages
+  <span class="term-highlight">experience</span>     - View operational status of Jio deployment stages
   <span class="term-highlight">projects</span>       - Review core code repositories in a tree structure
   <span class="term-highlight">contact</span>        - Print social handles registry in a tree structure
   <span class="term-highlight">tree</span>           - Display current portfolio workspace structure
@@ -204,7 +205,26 @@ function initTerminal() {
   <span class="term-highlight">date</span>           - Print environment timestamps
   <span class="term-highlight">clear</span>          - Clear shell window logs
   <span class="term-highlight">sudo ...</span>       - Execute commands with administrative rights`,
-        
+
+        'education': `education
+├── Indraprastha Institute of Information Technology, Delhi (IIIT-Delhi)
+│   ├── Degree: Bachelor of Technology (B.Tech)
+│   ├── Stream: Computer Science and Applied Mathematics
+│   ├── Timeline: 2019 – 2023
+│   └── Courses Completed (17):
+│        ├── Abstract Algebra, Advanced Engineering Mathematics, Advanced Programming
+│        ├── Machine Learning, Artificial Intelligence, Collaborative Filtering
+│        ├── Analysis and Design of Algorithms, Data Structures and Algorithms
+│        ├── Discrete Structures, Introduction to Programming, Linear Algebra
+│        ├── Number Theory, Scientific Computing, Operating Systems
+│        └── Probability and Statistics, Real Analysis, Theory of Computation
+├── Ganesh Shankar Vidyarthi Sarvodya Bal Vidyalaya No. 1
+│   ├── Level: High School (CBSE | Science PCM)
+│   └── Timeline: 2017 – 2019
+└── St. Brijmohan lal Senior Secondary School
+    ├── Level: Secondary School (CBSE)
+    └── Timeline: 2015 – 2017`,
+
         'certifications': `certifications
 ├── Top Highlights
 │   ├── Introduction to Data Structures & Algorithms in Java
@@ -219,14 +239,14 @@ function initTerminal() {
     └── Creative: Photography Basics and Beyond Specialization (6 certificates)
 
 [Note: View details or expand all 29 licenses in the dashboard certifications panel above]`,
-        
+
         'about': `Name: Bijendar Prasad (BIJΣПDΛЯ PЯΛƧΛD ＼⍩⃝／)
 Role: Site Reliability / DevOps Engineer
 Exp:  2.5+ Years designing cloud-native distributed environments
 Bio:  B.Tech graduate in Computer Science & Applied Mathematics from IIIT-Delhi. 
       Passionate SRE focusing on automation, cloud migration, performance optimization, 
       infrastructure compliance, and zero-downtime cluster lifecycle rules.`,
-        
+
         'skills': `skills
 ├── Languages
 │   ├── Java
@@ -255,25 +275,25 @@ Bio:  B.Tech graduate in Computer Science & Applied Mathematics from IIIT-Delhi.
     ├── MySQL / PostgreSQL / MongoDB
     ├── Redis / Cassandra
     └── Kafka / Spark / Airflow`,
-        
-        'pipeline': `pipeline
+
+        'experience': `experience
 └── Jio Platforms Limited (June 2023 - Present)
-    ├── [PASS] Jio-DLT (Nov 2024 - Jun 2025)
+    ├── Jio-DLT (Nov 2024 - Jun 2025)
     │    └── SRE & Ledger Operations (Fabric, Swarm, RAFT, Prometheus)
-    ├── [PASS] Jio-Energy (Mar 2024 - Aug 2024)
+    ├── Jio-Energy (Mar 2024 - Aug 2024)
     │    └── DevOps Architecture (Kubernetes, Docker, Nginx, CI/CD)
-    ├── [PASS] Jio-Games (Jan 2024 - Mar 2024)
+    ├── Jio-Games (Jan 2024 - Mar 2024)
     │    └── Data Ingestion Pipelines (Metabase, Airflow, Logstash)
-    └── [PASS] Jio-Krishi (Sep 2023 - Jan 2024)
+    └── Jio-Krishi (Sep 2023 - Jan 2024)
          └── Kafka Cluster Security & Automation (Ansible, ACLs)`,
-        
+
         'projects': `projects
 ├── Student Claim Process Workflow System
 │   ├── Details: Django, AWS backend, MySQL engine, multi-role access configs.
 │   └── Link: <a href="https://repository.iiitd.edu.in/xmlui/handle/123456789/1125" target="_blank" style="color:var(--accent-blue);text-decoration:underline">repository.iiitd.edu.in/xmlui/handle/123456789/1125</a>
 └── IIIT-DRIVE Cloud Storage Engine
     └── Details: Google Drive clone, AWS S3 buckets, K8s scaling, auto-garbage collections.`,
-        
+
         'contact': `contact
 ├── Social Registry
 │   ├── LinkedIn:  <a href="https://www.linkedin.com/in/bijendar-prasad-8447861b9/" target="_blank" style="color:var(--accent-blue);text-decoration:underline">linkedin.com/in/bijendar-prasad-8447861b9/</a>
@@ -284,21 +304,21 @@ Bio:  B.Tech graduate in Computer Science & Applied Mathematics from IIIT-Delhi.
 │   └── Instagram: <a href="https://www.instagram.com/prasadbijendar?igsh=cnFjZGFsMzlwM3Mz" target="_blank" style="color:var(--accent-blue);text-decoration:underline">instagram.com/prasadbijendar</a>
 └── Channels
     └── Email:     <a href="mailto:prasadbijendar7@gmail.com" style="color:var(--accent-blue);text-decoration:underline">prasadbijendar7@gmail.com</a>`,
-        
+
         'tree': `tree ./
 ./
 ├── index.html
 ├── resume.html
 ├── script.js
 └── style.css`,
-        
+
         'uptime': () => {
             const upDays = Math.floor(Math.random() * 150) + 120;
             const upHrs = Math.floor(Math.random() * 24);
             const upMins = Math.floor(Math.random() * 60);
             return `Uptime: up ${upDays} days, ${upHrs}:${upMins}, 1 user, load average: 0.05, 0.03, 0.01\nHost: bijendar-portfolio-infra-node-1\nTarget availability score: 99.9982% uptime maintained.`;
         },
-        
+
         'date': () => {
             return new Date().toString();
         }
@@ -308,22 +328,26 @@ Bio:  B.Tech graduate in Computer Science & Applied Mathematics from IIIT-Delhi.
         if (e.key === 'Enter') {
             const rawInput = terminalInput.value;
             let command = rawInput.trim().toLowerCase();
-            
-            // Map aliases to target certifications command
+
+            // Map aliases to target commands
             if (command === 'certs' || command === 'licenses') {
                 command = 'certifications';
+            } else if (command === 'edu') {
+                command = 'education';
+            } else if (command === 'pipeline' || command === 'exp') {
+                command = 'experience';
             }
-            
+
             // Create command echo
             const echoDiv = document.createElement('div');
             echoDiv.className = 'terminal-cmd-echo';
             echoDiv.innerHTML = `<span class="terminal-prompt">visitor@bijendar-sre:~$</span> ${rawInput}`;
             terminalHistory.appendChild(echoDiv);
-            
+
             // Process command
             const responseDiv = document.createElement('div');
             responseDiv.className = 'terminal-response';
-            
+
             if (command === '') {
                 // Empty command, do nothing
             } else if (command === 'clear') {
@@ -352,11 +376,11 @@ Nice try. Safe protocols protected this portfolio from corruption. SRE failover 
             } else {
                 responseDiv.innerHTML = `bijendar-shell: command not found: <span style="color:var(--accent-red)">${rawInput}</span>. Type <span class="term-highlight">help</span> for a list of available commands.`;
             }
-            
+
             if (command !== 'clear' && command !== '') {
                 terminalHistory.appendChild(responseDiv);
             }
-            
+
             // Reset input and scroll terminal to bottom
             terminalInput.value = '';
             terminalScreen.scrollTop = terminalScreen.scrollHeight;
@@ -368,7 +392,7 @@ Nice try. Safe protocols protected this portfolio from corruption. SRE failover 
 function initAntigravityParticles() {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     const heroSection = document.getElementById('home');
     if (!heroSection) return;
@@ -379,46 +403,46 @@ function initAntigravityParticles() {
     const repulsionRadius = 145;
     const repulsionStrength = 2.2;
     const gravityForce = -0.012; // Floating upwards
-    
+
     let mouse = { x: null, y: null };
-    
+
     // Resize handler
     function resizeCanvas() {
         const rect = heroSection.getBoundingClientRect();
         canvas.width = rect.width;
         canvas.height = rect.height;
     }
-    
+
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-    
+
     // Mouse tracking over hero area
     heroSection.addEventListener('mousemove', (e) => {
         const rect = heroSection.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
     });
-    
+
     heroSection.addEventListener('mouseleave', () => {
         mouse.x = null;
         mouse.y = null;
     });
-    
+
     // Particle Model
     class Particle {
         constructor() {
             this.reset(true);
         }
-        
+
         reset(randomY = false) {
             this.x = Math.random() * canvas.width;
             this.y = randomY ? Math.random() * canvas.height : canvas.height + 10;
             this.radius = Math.random() * 2.2 + 1.2;
-            
+
             // Random slow velocity vectors
             this.vx = (Math.random() - 0.5) * 0.5;
             this.vy = (Math.random() - 0.8) * 0.5;
-            
+
             // Neon brand accents
             const colors = [
                 'rgba(0, 242, 254, ',   // Cyan (Azure)
@@ -428,27 +452,27 @@ function initAntigravityParticles() {
             this.colorPrefix = colors[Math.floor(Math.random() * colors.length)];
             this.alpha = Math.random() * 0.45 + 0.15;
         }
-        
+
         update() {
             this.x += this.vx;
             this.y += this.vy;
-            
+
             // Velocity dampening
             this.vx *= 0.98;
             this.vy *= 0.98;
-            
+
             // Constant upward drift
             this.vy += gravityForce;
-            
+
             // Gentle wave flow
             this.vx += Math.sin((Date.now() / 800) + this.y * 0.015) * 0.004;
-            
+
             // Repulsion physics (antigravity pushing effect)
             if (mouse.x !== null && mouse.y !== null) {
                 const dx = this.x - mouse.x;
                 const dy = this.y - mouse.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                
+
                 if (dist < repulsionRadius) {
                     const force = (repulsionRadius - dist) / repulsionRadius;
                     // Accelerate away from cursor
@@ -456,7 +480,7 @@ function initAntigravityParticles() {
                     this.vy += (dy / dist) * force * repulsionStrength;
                 }
             }
-            
+
             // Reset at top, boundaries bounce
             if (this.y < -15) {
                 this.reset(false);
@@ -469,7 +493,7 @@ function initAntigravityParticles() {
                 this.vx = -this.vx * 0.6;
             }
         }
-        
+
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
@@ -480,29 +504,29 @@ function initAntigravityParticles() {
             ctx.shadowBlur = 0;
         }
     }
-    
+
     // Seed particle population
     for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
     }
-    
+
     // Render loop
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         // Update & paint points
         for (let i = 0; i < particles.length; i++) {
             particles[i].update();
             particles[i].draw();
         }
-        
+
         // Render network grid lines
         for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x;
                 const dy = particles[i].y - particles[j].y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                
+
                 if (dist < connectionDistance) {
                     const lineAlpha = (1.0 - (dist / connectionDistance)) * 0.12;
                     ctx.beginPath();
@@ -514,12 +538,12 @@ function initAntigravityParticles() {
                 }
             }
         }
-        
+
         requestAnimationFrame(animate);
     }
-    
+
     animate();
-    
+
     // 3D Parallax Tilt effect on the Hero container content
     const heroContainer = document.querySelector('.hero-container');
     if (heroContainer) {
@@ -529,12 +553,12 @@ function initAntigravityParticles() {
             const cy = rect.height / 2;
             const dx = (e.clientX - rect.left - cx) / cx;
             const dy = (e.clientY - rect.top - cy) / cy;
-            
+
             // Tilts up to 7 degrees, translates up to 8px
             heroContainer.style.transform = `perspective(1000px) rotateY(${dx * 7}deg) rotateX(${-dy * 7}deg) translateZ(8px)`;
             heroContainer.style.transition = 'none';
         });
-        
+
         heroSection.addEventListener('mouseleave', () => {
             heroContainer.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0deg)';
             heroContainer.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
@@ -547,15 +571,15 @@ function initCertifications() {
     const grid = document.getElementById('certifications-grid');
     const toggleBtn = document.getElementById('toggle-certs-btn');
     if (!grid || !toggleBtn) return;
-    
+
     let certsExpanded = false;
-    
+
     const certifications = [
         // Top 3 selected by user
         { name: "Introduction to Data Structures & Algorithms in Java", url: "https://www.linkedin.com/learning/certificates/99501668359327ee8c4a2f248eb8a75c05dd28168b29ed224b9354264d38566a", issuer: "LinkedIn Learning", badge: "☕" },
         { name: "Create and Manage Cloud Resources", url: "https://www.cloudskillsboost.google/public_profiles/23594fa8-8c63-4d59-b0b8-178133f84a39/badges/3104503?utm_medium=social&utm_source=linkedin&utm_campaign=ql-social-share", issuer: "Google Cloud", badge: "☁️" },
         { name: "Photography Techniques: Light, Content, and Sharing", url: "https://www.coursera.org/account/accomplishments/certificate/M7JKZUL2K2MD", issuer: "Coursera (Michigan State University)", badge: "📷" },
-        
+
         // Remaining 26 from Book1.csv
         { name: "Git Essential Training: The Basics (2019)", url: "https://www.linkedin.com/learning/certificates/779ddc50df8553870a76f3a7230347d32bedb79c136b744231473cd212e125a3", issuer: "LinkedIn Learning", badge: "💻" },
         { name: "Learning Linux Command Line (2018)", url: "https://www.linkedin.com/learning/certificates/c28f2b2579f3b4e8e4e65ba39c4a8908fdee4ab08e152c28009410f9dc2d0bda", issuer: "LinkedIn Learning", badge: "🐧" },
@@ -584,18 +608,18 @@ function initCertifications() {
         { name: "Camera Control", url: "https://www.coursera.org/account/accomplishments/certificate/G3PECHR8EMZV", issuer: "Coursera (Michigan State University)", badge: "📷" },
         { name: "Photography Basics and Beyond: From Smartphone to DSLR Specialization", url: "https://www.coursera.org/account/accomplishments/specialization/certificate/SLBN2CJ8ECWJ", issuer: "Coursera (Michigan State University)", badge: "📷" }
     ];
-    
+
     function renderCerts(limit) {
         grid.innerHTML = '';
         const listToRender = certifications.slice(0, limit);
-        
+
         listToRender.forEach((cert, idx) => {
             const card = document.createElement('div');
             card.className = 'certification-card';
             card.style.opacity = '0';
             card.style.transform = 'translateY(15px)';
             card.style.transition = 'all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            
+
             card.innerHTML = `
                 <div class="cert-badge">${cert.badge}</div>
                 <div class="cert-info">
@@ -605,9 +629,9 @@ function initCertifications() {
                     <p class="cert-issuer">${cert.issuer}</p>
                 </div>
             `;
-            
+
             grid.appendChild(card);
-            
+
             // Stagger animation timing
             setTimeout(() => {
                 card.style.opacity = '1';
@@ -615,10 +639,10 @@ function initCertifications() {
             }, idx * 35);
         });
     }
-    
+
     // Initial top 3 rendering
     renderCerts(3);
-    
+
     // Bind toggle event
     toggleBtn.addEventListener('click', () => {
         if (!certsExpanded) {
@@ -629,7 +653,7 @@ function initCertifications() {
             renderCerts(3);
             toggleBtn.innerHTML = 'show all 29 licenses &rarr;';
             certsExpanded = false;
-            
+
             // Scroll smoothly back to section header
             document.getElementById('certifications').scrollIntoView({ behavior: 'smooth' });
         }
