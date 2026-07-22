@@ -35,11 +35,26 @@ function initCursorTracker() {
         requestAnimationFrame(animateRing);
     }
     animateRing();
+
+    // Event delegation for cursor hover effect on interactive elements
+    const interactiveSelector = 'a, button, input, .art-card, .filter-pill, .explore-btn, .sc-pill, .portrait-card';
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(interactiveSelector)) {
+            ring.classList.add('hover-active');
+            dot.classList.add('hover-active');
+        }
+    });
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(interactiveSelector)) {
+            ring.classList.remove('hover-active');
+            dot.classList.remove('hover-active');
+        }
+    });
 }
 
-// Cynx.io-style 3D Mouse Tracking Tilt Physics
+// 3D Mouse Tracking Tilt Physics (for Portrait Card Spotlight)
 function initCynxHoverPhysics() {
-    const cards = document.querySelectorAll('.art-card, .portrait-card');
+    const cards = document.querySelectorAll('.portrait-card');
     
     cards.forEach(card => {
         card.style.transformStyle = 'preserve-3d';
@@ -56,15 +71,15 @@ function initCynxHoverPhysics() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            // Calculate tilt angle (-8 to 8 degrees)
-            const rotateX = ((y - centerY) / centerY) * -8;
-            const rotateY = ((x - centerX) / centerX) * 8;
+            // Calculate tilt angle (-6 to 6 degrees)
+            const rotateX = ((y - centerY) / centerY) * -6;
+            const rotateY = ((x - centerX) / centerX) * 6;
             
-            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`;
         });
         
         card.addEventListener('mouseleave', () => {
-            card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease, box-shadow 0.3s ease';
+            card.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease, box-shadow 0.3s ease';
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
         });
     });

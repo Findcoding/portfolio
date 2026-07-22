@@ -51,6 +51,9 @@ let typingInterval = null;
 
 // Document Ready
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Custom Pointer Cursor Tracker
+    initCursorTracker();
+
     // 1. Mobile navigation toggle
     const toggleBtn = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('nav-links');
@@ -694,6 +697,49 @@ function initInteractive3DTilt() {
             card.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease, box-shadow 0.3s ease';
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
         });
+    });
+}
+
+// Custom Pointer & Spotlight Follower Cursor
+function initCursorTracker() {
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    if (!dot || !ring) return;
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = `${mouseX}px`;
+        dot.style.top = `${mouseY}px`;
+    });
+
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        ring.style.left = `${ringX}px`;
+        ring.style.top = `${ringY}px`;
+        requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // Event delegation for cursor hover effect on interactive elements
+    const interactiveSelector = 'a, button, input, .btn, .nav-item, .pipeline-stage, .project-card, .achievement-card, .education-card, .certification-card, .skill-category, .dashboard-widget, .social-icon';
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(interactiveSelector)) {
+            ring.classList.add('hover-active');
+            dot.classList.add('hover-active');
+        }
+    });
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(interactiveSelector)) {
+            ring.classList.remove('hover-active');
+            dot.classList.remove('hover-active');
+        }
     });
 }
 

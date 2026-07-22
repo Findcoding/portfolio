@@ -69,6 +69,22 @@ body {
 body:hover .cursor-dot { opacity: 1; }
 body:hover .cursor-ring { opacity: 1; }
 
+/* Interactive Hover States for Cursor */
+.cursor-ring.hover-active {
+    width: 46px;
+    height: 46px;
+    border-color: var(--accent-blue);
+    background-color: rgba(0, 242, 254, 0.05);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+}
+
+.cursor-dot.hover-active {
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    box-shadow: 0 0 8px var(--accent-blue);
+}
+
 /* Header Navigation */
 .art-header {
     position: fixed;
@@ -705,19 +721,51 @@ body:hover .cursor-ring { opacity: 1; }
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: 320px;
     gap: 30px;
-    perspective: 1200px; /* Enable Cynx.io 3D perspective */
 }
 
-/* Photo Card (Cynx.io 3D Mouse Physics & Hover Animations) */
+/* Photo Card (Optimized Hardware Accelerated Cinematic Hover) */
 .art-card {
     position: relative;
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     cursor: pointer;
-    transform-style: preserve-3d;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateY(0);
     transition: transform 0.4s var(--transition-smooth), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Metallic Light Sheen Effect on Hover */
+.art-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 242, 254, 0.08) 50%,
+        transparent 100%
+    );
+    transform: skewX(-25deg);
+    transition: left 0.75s ease-in-out;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.art-card:hover::after {
+    left: 140%;
+}
+
+.art-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 242, 254, 0.5);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 242, 254, 0.2);
+    z-index: 10;
 }
 
 /* Masonry Grid Span Variances */
@@ -725,6 +773,16 @@ body:hover .cursor-ring { opacity: 1; }
 .grid-size-tall   { grid-column: span 4; grid-row: span 2; }
 .grid-size-wide   { grid-column: span 8; grid-row: span 1; }
 .grid-size-large  { grid-column: span 8; grid-row: span 2; }
+.grid-size-full   { grid-column: span 12; grid-row: span 2; }
+
+.grid-size-full .image-wrapper img {
+    object-fit: contain !important;
+    object-position: center !important;
+}
+
+.img-pos-bottom {
+    object-position: center bottom !important;
+}
 
 .card-inner {
     position: relative;
@@ -737,45 +795,44 @@ body:hover .cursor-ring { opacity: 1; }
     width: 100%;
     height: 100%;
     overflow: hidden;
+    background: #070709;
 }
 
 .image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s var(--transition-smooth), filter 0.5s ease;
-    filter: brightness(0.9) contrast(1.05);
-}
-
-.art-card:hover {
-    border-color: var(--border-glow);
-    box-shadow: 0 20px 40px rgba(0, 242, 254, 0.15);
-    z-index: 10;
+    will-change: transform, opacity;
+    transform: scale(1.01);
+    opacity: 0.88;
+    transition: transform 0.65s var(--transition-smooth), opacity 0.4s ease;
 }
 
 .art-card:hover .image-wrapper img {
-    transform: scale(1.08);
-    filter: brightness(1) contrast(1.1);
+    transform: scale(1.07);
+    opacity: 1;
 }
 
-/* Hover Overlay (Cynx.io-style Typography & Reveal) */
+/* Hover Overlay (Typography & Reveal) */
 .card-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 30px;
+    padding: 28px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: linear-gradient(
         to bottom,
-        rgba(7, 7, 9, 0.2) 0%,
-        rgba(7, 7, 9, 0.85) 100%
+        rgba(7, 7, 9, 0.15) 0%,
+        rgba(7, 7, 9, 0.35) 40%,
+        rgba(7, 7, 9, 0.92) 100%
     );
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.35s ease;
+    z-index: 2;
 }
 
 .art-card:hover .card-overlay {
@@ -784,15 +841,14 @@ body:hover .cursor-ring { opacity: 1; }
 
 .card-badge {
     align-self: flex-start;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 2px;
     color: var(--accent-blue);
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 242, 254, 0.3);
-    padding: 4px 10px;
-    border-radius: 4px;
-    transform: translateY(-10px);
+    background: rgba(7, 7, 10, 0.85);
+    border: 1px solid rgba(0, 242, 254, 0.35);
+    padding: 4px 12px;
+    border-radius: 20px;
+    transform: translateY(-8px);
     transition: transform 0.4s var(--transition-smooth);
 }
 
@@ -802,18 +858,18 @@ body:hover .cursor-ring { opacity: 1; }
 
 .photo-title {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 4px;
-    transform: translateY(10px);
+    transform: translateY(12px);
     transition: transform 0.4s var(--transition-smooth);
 }
 
 .photo-meta {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--text-secondary);
-    transform: translateY(10px);
+    transform: translateY(12px);
     transition: transform 0.4s var(--transition-smooth) 0.05s;
 }
 
@@ -824,12 +880,18 @@ body:hover .cursor-ring { opacity: 1; }
 
 .view-prompt {
     position: absolute;
-    bottom: 30px;
-    right: 30px;
+    bottom: 28px;
+    right: 28px;
     font-size: 0.75rem;
     letter-spacing: 1px;
     color: var(--accent-blue);
     font-weight: 600;
+    transition: transform 0.35s var(--transition-smooth), color 0.3s ease;
+}
+
+.art-card:hover .view-prompt {
+    transform: translate(-3px, -3px);
+    color: #ffffff;
 }
 
 /* Artist Statement Section */
@@ -1146,7 +1208,7 @@ body:hover .cursor-ring { opacity: 1; }
     }
     
     .grid-size-normal, .grid-size-tall { grid-column: span 3; }
-    .grid-size-wide, .grid-size-large  { grid-column: span 6; }
+    .grid-size-wide, .grid-size-large, .grid-size-full { grid-column: span 6; }
 }
 
 @media screen and (max-width: 768px) {
