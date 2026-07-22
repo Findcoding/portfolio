@@ -211,18 +211,20 @@ function initLightboxModal() {
         }
     });
     
-    // Keyboard navigation
-    window.addEventListener('keydown', (e) => {
-        if (!modal.classList.contains('active')) return;
-        
-        if (e.key === 'Escape') {
-            closeLightbox();
-        } else if (e.key === 'ArrowLeft') {
-            const newIndex = (currentIndex - 1 + cards.length) % cards.length;
-            openLightbox(newIndex);
-        } else if (e.key === 'ArrowRight') {
-            const newIndex = (currentIndex + 1) % cards.length;
-            openLightbox(newIndex);
-        }
-    });
+    // Masterpiece Spotlight Lightbox Trigger (1 (3).jpg)
+    const masterpieceBtn = document.getElementById('open-masterpiece-btn');
+    const masterpieceImgFrame = document.getElementById('spotlight-img-frame');
+
+    function openSpotlightLightbox() {
+        if (!modal || !modalImg) return;
+        modalImg.src = 'photos/1 (3).jpg';
+        modalTitle.textContent = 'SERENITY IN BLOOM';
+        modalSubtitle.textContent = 'Botanical Nature Study • Artist\'s Special Selection';
+        modalCounter.textContent = 'SPECIAL FEATURE';
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    if (masterpieceBtn) masterpieceBtn.addEventListener('click', openSpotlightLightbox);
+    if (masterpieceImgFrame) masterpieceImgFrame.addEventListener('click', openSpotlightLightbox);
 }
