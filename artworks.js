@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initCynxHoverPhysics();
     initPortraitToggle();
     initFilterSystem();
+    initLoadMoreSystem();
     initLightboxModal();
+    initFeaturedCarousel();
 });
 
 // Custom Pointer & Spotlight Follower
@@ -37,7 +39,7 @@ function initCursorTracker() {
     animateRing();
 
     // Event delegation for cursor hover effect on interactive elements
-    const interactiveSelector = 'a, button, input, .art-card, .filter-pill, .explore-btn, .sc-pill, .portrait-card';
+    const interactiveSelector = 'a, button, input, .art-card, .filter-pill, .explore-btn, .sc-pill, .portrait-card, .show-more-btn';
     document.addEventListener('mouseover', (e) => {
         if (e.target.closest(interactiveSelector)) {
             ring.classList.add('hover-active');
@@ -125,7 +127,17 @@ function initFilterSystem() {
             
             cards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                if (filterValue === 'all' || category === filterValue) {
+                if (filterValue === 'all') {
+                    if (card.classList.contains('load-more-hidden')) {
+                        card.style.display = 'none';
+                    } else {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    }
+                } else if (category === filterValue) {
                     card.style.display = 'block';
                     setTimeout(() => {
                         card.style.opacity = '1';
@@ -139,6 +151,72 @@ function initFilterSystem() {
                     }, 300);
                 }
             });
+        });
+    });
+}
+
+// Show More / Load More Gallery System Controller
+function initLoadMoreSystem() {
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadMoreContainer = document.querySelector('.load-more-container');
+    const hiddenItems = document.querySelectorAll('.load-more-hidden-item');
+    let isExpanded = false;
+
+    if (!loadMoreBtn) return;
+
+    loadMoreBtn.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        const btnText = loadMoreBtn.querySelector('span:first-child');
+        const btnIcon = loadMoreBtn.querySelector('.btn-icon');
+
+        if (isExpanded) {
+            hiddenItems.forEach(card => {
+                card.classList.remove('load-more-hidden');
+                card.style.display = 'block';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                }, 50);
+            });
+            if (btnText) btnText.textContent = 'SHOW LESS';
+            if (btnIcon) btnIcon.innerHTML = '&uarr;';
+        } else {
+            hiddenItems.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.classList.add('load-more-hidden');
+                    card.style.display = 'none';
+                }, 300);
+            });
+            if (btnText) btnText.textContent = 'SHOW MORE WORKS';
+            if (btnIcon) btnIcon.innerHTML = '&darr;';
+
+            const galleryGrid = document.getElementById('gallery-grid');
+            if (galleryGrid) {
+                galleryGrid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    });
+
+    const filterBtns = document.querySelectorAll('.filter-pill');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filterValue = btn.getAttribute('data-filter');
+            if (filterValue !== 'all') {
+                if (loadMoreContainer) loadMoreContainer.style.display = 'none';
+                hiddenItems.forEach(card => {
+                    card.classList.remove('load-more-hidden');
+                });
+            } else {
+                if (loadMoreContainer) loadMoreContainer.style.display = 'flex';
+                if (!isExpanded) {
+                    hiddenItems.forEach(card => {
+                        card.classList.add('load-more-hidden');
+                        card.style.display = 'none';
+                    });
+                }
+            }
         });
     });
 }
@@ -227,4 +305,152 @@ function initLightboxModal() {
 
     if (masterpieceBtn) masterpieceBtn.addEventListener('click', openSpotlightLightbox);
     if (masterpieceImgFrame) masterpieceImgFrame.addEventListener('click', openSpotlightLightbox);
+
+    // Lord Shiva (Adiyogi) Cosmic Sanctuary Lightbox Trigger (1 (21).jpg)
+    const shivaBtn = document.getElementById('open-shiva-btn');
+    const shivaFrame = document.getElementById('shiva-frame');
+
+    function openShivaLightbox() {
+        if (!modal || !modalImg) return;
+        modalImg.src = 'photos/1 (21).jpg';
+        modalTitle.textContent = 'ADIYOGI: THE FIRST YOGI';
+        modalSubtitle.textContent = 'Lord Shiva • Cosmic Sanctuary Chiaroscuro Study';
+        modalCounter.textContent = 'DIVINE FEATURE';
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    if (shivaBtn) shivaBtn.addEventListener('click', openShivaLightbox);
+    if (shivaFrame) shivaFrame.addEventListener('click', openShivaLightbox);
+}
+
+// Carousel Lightbox Global Trigger
+function openCarouselLightbox(imageSrc, title, subtitle, counterText) {
+    const modal = document.getElementById('lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img');
+    const modalTitle = document.getElementById('lightbox-title');
+    const modalSubtitle = document.getElementById('lightbox-subtitle');
+    const modalCounter = document.getElementById('lightbox-counter');
+
+    if (!modal || !modalImg) return;
+    modalImg.src = imageSrc;
+    modalTitle.textContent = title;
+    modalSubtitle.textContent = subtitle;
+    modalCounter.textContent = counterText;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Featured 5-Card Collapsed Carousel Controller
+function initFeaturedCarousel() {
+    const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+    const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+    const prevBtn = document.getElementById('carousel-prev-btn');
+    const nextBtn = document.getElementById('carousel-next-btn');
+    const stage = document.getElementById('carousel-viewport');
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+    const total = slides.length;
+
+    function updateCarouselPositions() {
+        slides.forEach((slide, i) => {
+            // Calculate relative offset from currentIndex for any array length
+            let diff = i - currentIndex;
+            const half = Math.floor(total / 2);
+            while (diff > half) diff -= total;
+            while (diff < -half) diff += total;
+
+            // Remove all layout classes
+            slide.classList.remove('slide-center', 'slide-prev-1', 'slide-prev-2', 'slide-prev-3', 'slide-next-1', 'slide-next-2', 'slide-next-3', 'slide-hidden');
+
+            if (diff === 0) {
+                slide.classList.add('slide-center');
+            } else if (diff === -1) {
+                slide.classList.add('slide-prev-1');
+            } else if (diff === -2) {
+                slide.classList.add('slide-prev-2');
+            } else if (diff === -3) {
+                slide.classList.add('slide-prev-3');
+            } else if (diff === 1) {
+                slide.classList.add('slide-next-1');
+            } else if (diff === 2) {
+                slide.classList.add('slide-next-2');
+            } else if (diff === 3) {
+                slide.classList.add('slide-next-3');
+            } else {
+                slide.classList.add('slide-hidden');
+            }
+        });
+
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+    function goToSlide(index) {
+        currentIndex = (index + total) % total;
+        updateCarouselPositions();
+    }
+
+    function nextSlide() {
+        goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+        goToSlide(currentIndex - 1);
+    }
+
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayTimer = setInterval(nextSlide, 5000);
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+    }
+
+    // Click handlers for collapsed preview slides
+    slides.forEach((slide, i) => {
+        slide.addEventListener('click', (e) => {
+            // If clicking lightbox button inside center slide, let it open lightbox
+            if (e.target.closest('.slide-lightbox-btn')) return;
+            if (i !== currentIndex) {
+                goToSlide(i);
+                startAutoPlay();
+            }
+        });
+    });
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            startAutoPlay();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            startAutoPlay();
+        });
+    }
+
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+            goToSlide(i);
+            startAutoPlay();
+        });
+    });
+
+    if (stage) {
+        stage.addEventListener('mouseenter', stopAutoPlay);
+        stage.addEventListener('mouseleave', startAutoPlay);
+    }
+
+    // Initial positioning & start 5s timer
+    updateCarouselPositions();
+    startAutoPlay();
 }

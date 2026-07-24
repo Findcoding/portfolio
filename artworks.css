@@ -376,7 +376,6 @@ body:hover .cursor-ring { opacity: 1; }
     background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.75) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
 }
 
 .intro-subtitle {
@@ -1973,3 +1972,758 @@ body:hover .cursor-ring { opacity: 1; }
         font-size: 0.88rem;
     }
 }
+
+/* Load More Button & Hidden State Styling */
+.art-card.load-more-hidden {
+    display: none !important;
+}
+
+.load-more-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 45px;
+    margin-bottom: 25px;
+}
+
+.show-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(15, 14, 22, 0.85);
+    border: 1px solid rgba(0, 242, 254, 0.35);
+    color: var(--accent-blue);
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.35s var(--transition-smooth);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 242, 254, 0.1);
+}
+
+.show-more-btn:hover {
+    background: rgba(0, 242, 254, 0.15);
+    border-color: var(--accent-blue);
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 242, 254, 0.25);
+}
+
+.show-more-btn .btn-icon {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.show-more-btn:hover .btn-icon {
+    transform: translateY(3px);
+}
+
+/* Lord Shiva (Adiyogi) Cosmic Sanctuary Showcase Feature Section */
+.shiva-sanctuary-section {
+    position: relative;
+    width: 100%;
+    padding: 110px 30px;
+    background: radial-gradient(circle at 50% 30%, #0d0c18 0%, #050508 70%, #020203 100%);
+    border-top: 1px solid rgba(212, 175, 55, 0.25);
+    border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+    overflow: hidden;
+}
+
+.shiva-bg-aurora {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 700px;
+    background: radial-gradient(ellipse at center, rgba(123, 44, 191, 0.18) 0%, rgba(212, 175, 55, 0.12) 40%, rgba(0, 242, 254, 0.08) 70%, transparent 90%);
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+.shiva-stars-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        radial-gradient(rgba(212, 175, 55, 0.3) 1.5px, transparent 1.5px);
+    background-size: 60px 60px, 140px 140px;
+    background-position: 0 0, 30px 50px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.shiva-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+.shiva-header-block {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 55px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.shiva-tag {
+    font-size: 0.76rem;
+    letter-spacing: 3px;
+    color: #d4af37;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.shiva-main-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #ffffff;
+    background: linear-gradient(180deg, #ffffff 0%, #d4af37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.shiva-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.shiva-display-card {
+    background: rgba(12, 11, 20, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 24px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: minmax(320px, 440px) 1fr;
+    gap: 45px;
+    align-items: center;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(212, 175, 55, 0.15);
+    transition: all 0.4s ease;
+}
+
+.shiva-display-card:hover {
+    border-color: rgba(212, 175, 55, 0.65);
+    box-shadow: 0 35px 90px rgba(0, 0, 0, 0.95), 0 0 65px rgba(212, 175, 55, 0.25);
+}
+
+.shiva-frame-wrapper {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+}
+
+.shiva-image-holder {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shiva-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.75s var(--transition-smooth);
+    will-change: transform;
+}
+
+.shiva-frame-wrapper:hover .shiva-photo {
+    transform: scale(1.05);
+}
+
+.shiva-badge-top {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(12, 11, 20, 0.9);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: #d4af37;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 3;
+}
+
+.shiva-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d4af37;
+    box-shadow: 0 0 8px #d4af37;
+}
+
+.shiva-hover-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(5, 5, 8, 0.95) 0%, transparent 100%);
+    padding: 30px 20px 15px 20px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    text-align: center;
+    z-index: 3;
+}
+
+.shiva-frame-wrapper:hover .shiva-hover-overlay {
+    opacity: 1;
+}
+
+.shiva-narrative-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.shiva-mantra-badge {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    letter-spacing: 4px;
+    color: #d4af37;
+    font-weight: 700;
+}
+
+.shiva-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.95);
+    border-left: 2px solid #d4af37;
+    padding-left: 18px;
+    line-height: 1.55;
+}
+
+.shiva-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.shiva-specs-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.shiva-spec-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    padding: 10px 12px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.shiva-spec-item .spec-label {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+}
+
+.shiva-spec-item .spec-val {
+    font-size: 0.8rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.shiva-actions {
+    margin-top: 5px;
+}
+
+.shiva-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(0, 242, 254, 0.2));
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    color: #ffffff;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+}
+
+.shiva-view-btn:hover {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.45), rgba(0, 242, 254, 0.4));
+    border-color: #d4af37;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.35);
+}
+
+@media screen and (max-width: 992px) {
+    .shiva-display-card {
+        grid-template-columns: 1fr;
+        padding: 25px;
+        gap: 30px;
+    }
+    .shiva-frame-wrapper {
+        height: 380px;
+    }
+    .shiva-specs-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Panoramic Featured 5-Card Collapsed Carousel Showcase Section */
+.art-carousel-section {
+    position: relative;
+    width: 100%;
+    padding: 75px 20px;
+    background: radial-gradient(circle at 50% 20%, #0e0d1a 0%, #040407 85%);
+    border-top: 1px solid rgba(0, 242, 254, 0.2);
+    border-bottom: 1px solid rgba(123, 44, 191, 0.25);
+    overflow: hidden;
+}
+
+.carousel-container {
+    max-width: 1350px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.carousel-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.carousel-tag {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 3px;
+    color: var(--accent-cyan);
+    font-weight: 700;
+}
+
+.carousel-main-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: #ffffff;
+    background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.65) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.carousel-line-accent {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-purple), transparent);
+    border-radius: 2px;
+}
+
+.carousel-viewport {
+    position: relative;
+    width: 100%;
+    height: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.carousel-track {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-slide {
+    position: absolute;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.75s cubic-bezier(0.25, 1, 0.4, 1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+    will-change: transform, width, left, opacity;
+}
+
+/* 1. Center Active Slide (3:4 aspect ratio) */
+.carousel-slide.slide-center {
+    width: 370px;
+    height: 510px;
+    aspect-ratio: 3 / 4;
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    z-index: 10;
+    border-color: rgba(0, 242, 254, 0.45);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 45px rgba(0, 242, 254, 0.2);
+}
+
+/* 2. Left Near Collapsed Strip (1st) */
+.carousel-slide.slide-prev-1 {
+    width: 80px;
+    height: 460px;
+    left: calc(50% - 275px);
+    transform: translateX(-50%) scale(0.95);
+    opacity: 0.8;
+    z-index: 8;
+    cursor: pointer;
+    filter: brightness(0.75);
+}
+
+.carousel-slide.slide-prev-1:hover {
+    filter: brightness(0.95);
+    border-color: rgba(0, 242, 254, 0.35);
+}
+
+/* 3. Left Mid Collapsed Strip (2nd) */
+.carousel-slide.slide-prev-2 {
+    width: 60px;
+    height: 420px;
+    left: calc(50% - 360px);
+    transform: translateX(-50%) scale(0.9);
+    opacity: 0.55;
+    z-index: 6;
+    cursor: pointer;
+    filter: brightness(0.55);
+}
+
+.carousel-slide.slide-prev-2:hover {
+    filter: brightness(0.8);
+}
+
+/* 4. Left Far Collapsed Strip (3rd) */
+.carousel-slide.slide-prev-3 {
+    width: 45px;
+    height: 375px;
+    left: calc(50% - 425px);
+    transform: translateX(-50%) scale(0.85);
+    opacity: 0.35;
+    z-index: 4;
+    cursor: pointer;
+    filter: brightness(0.4);
+}
+
+.carousel-slide.slide-prev-3:hover {
+    filter: brightness(0.65);
+}
+
+/* 5. Right Near Collapsed Strip (1st) */
+.carousel-slide.slide-next-1 {
+    width: 80px;
+    height: 460px;
+    left: calc(50% + 275px);
+    transform: translateX(-50%) scale(0.95);
+    opacity: 0.8;
+    z-index: 8;
+    cursor: pointer;
+    filter: brightness(0.75);
+}
+
+.carousel-slide.slide-next-1:hover {
+    filter: brightness(0.95);
+    border-color: rgba(0, 242, 254, 0.35);
+}
+
+/* 6. Right Mid Collapsed Strip (2nd) */
+.carousel-slide.slide-next-2 {
+    width: 60px;
+    height: 420px;
+    left: calc(50% + 360px);
+    transform: translateX(-50%) scale(0.9);
+    opacity: 0.55;
+    z-index: 6;
+    cursor: pointer;
+    filter: brightness(0.55);
+}
+
+.carousel-slide.slide-next-2:hover {
+    filter: brightness(0.8);
+}
+
+/* 7. Right Far Collapsed Strip (3rd) */
+.carousel-slide.slide-next-3 {
+    width: 45px;
+    height: 375px;
+    left: calc(50% + 425px);
+    transform: translateX(-50%) scale(0.85);
+    opacity: 0.35;
+    z-index: 4;
+    cursor: pointer;
+    filter: brightness(0.4);
+}
+
+.carousel-slide.slide-next-3:hover {
+    filter: brightness(0.65);
+}
+
+.carousel-slide.slide-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) scale(0.8);
+    z-index: 1;
+}
+
+.slide-image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.8s ease;
+}
+
+.carousel-slide.slide-center:hover .slide-image-wrapper img {
+    transform: scale(1.05);
+}
+
+/* Slide Content Overlay */
+.slide-content-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(5, 5, 12, 0.95) 0%, rgba(5, 5, 12, 0.7) 65%, transparent 100%);
+    padding: 18px 24px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+    transform: translateY(6px);
+}
+
+.carousel-slide.slide-center .slide-content-overlay {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.slide-counter {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    color: var(--accent-cyan);
+    font-weight: 700;
+}
+
+.slide-category-badge {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(0, 242, 254, 0.12);
+    border: 1px solid rgba(0, 242, 254, 0.35);
+    padding: 4px 12px;
+    border-radius: 20px;
+    width: fit-content;
+    text-transform: uppercase;
+}
+
+.slide-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    line-height: 1.25;
+}
+
+.slide-subtitle {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+}
+
+.slide-actions {
+    margin-top: 6px;
+}
+
+.slide-lightbox-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 242, 254, 0.15);
+    border: 1px solid rgba(0, 242, 254, 0.4);
+    color: #ffffff;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.35s ease;
+}
+
+.slide-lightbox-btn:hover {
+    background: rgba(0, 242, 254, 0.3);
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.3);
+}
+
+/* Nav Controls */
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(12, 11, 20, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s ease;
+}
+
+.carousel-nav-btn:hover {
+    background: rgba(0, 242, 254, 0.3);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+}
+
+.carousel-nav-btn.nav-prev {
+    left: 15px;
+}
+
+.carousel-nav-btn.nav-next {
+    right: 15px;
+}
+
+/* Pagination Dots Below Image Container */
+.carousel-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+    position: relative;
+    z-index: 10;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.35s ease;
+}
+
+.carousel-dot:hover {
+    background: rgba(0, 242, 254, 0.6);
+}
+
+.carousel-dot.active {
+    width: 32px;
+    border-radius: 12px;
+    background: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+}
+
+@media screen and (max-width: 992px) {
+    .carousel-slide.slide-center {
+        width: 320px;
+        height: 440px;
+    }
+    .carousel-slide.slide-prev-1 {
+        width: 60px;
+        height: 400px;
+        left: calc(50% - 220px);
+    }
+    .carousel-slide.slide-prev-2 {
+        width: 45px;
+        height: 360px;
+        left: calc(50% - 280px);
+    }
+    .carousel-slide.slide-next-1 {
+        width: 60px;
+        height: 400px;
+        left: calc(50% + 220px);
+    }
+    .carousel-slide.slide-next-2 {
+        width: 45px;
+        height: 360px;
+        left: calc(50% + 280px);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .carousel-slide.slide-center {
+        width: 250px;
+        height: 350px;
+    }
+    .carousel-slide.slide-prev-1 {
+        width: 35px;
+        height: 310px;
+        left: calc(50% - 155px);
+    }
+    .carousel-slide.slide-prev-2 {
+        width: 25px;
+        height: 280px;
+        left: calc(50% - 195px);
+    }
+    .carousel-slide.slide-next-1 {
+        width: 35px;
+        height: 310px;
+        left: calc(50% + 155px);
+    }
+    .carousel-slide.slide-next-2 {
+        width: 25px;
+        height: 280px;
+        left: calc(50% + 195px);
+    }
+}
+
+
+
