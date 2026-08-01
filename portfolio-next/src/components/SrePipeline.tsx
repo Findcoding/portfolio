@@ -81,6 +81,11 @@ const pipelineData: Record<string, { title: string; role: string; date: string; 
   },
 };
 
+function hexToRgba(hex: string, a: number) {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+}
+
 export default function SrePipeline() {
   const [activeStage, setActiveStage] = useState<string>("log-dlt");
   const [displayedLogs, setDisplayedLogs] = useState<LogLine[]>([]);
@@ -127,28 +132,81 @@ export default function SrePipeline() {
           Explore the production systems I've engineered. Each deployment represents a platform I designed, automated, or operated during my journey at Jio Platforms.
         </p>
 
-        {/* Pipeline Stage Buttons - Horizontal Scrollable on Mobile with Reduced Height */}
-        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 overflow-x-auto sm:overflow-visible pb-3 sm:pb-0 mb-8 snap-x snap-mandatory scroll-smooth no-scrollbar -mx-6 sm:mx-0 px-6 sm:px-0">
-          {Object.entries(pipelineData).map(([key, data]) => {
+        {/* Pipeline Stage Buttons - Connected CI/CD deploy-stage nodes */}
+        <style>{`
+          @keyframes pipelineRailFlow { to { background-position-x: 14px; } }
+          .pipeline-rail-flow { animation: pipelineRailFlow 0.6s linear infinite; }
+        `}</style>
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 overflow-x-auto sm:overflow-visible pb-3 sm:pb-0 mb-8 snap-x snap-mandatory scroll-smooth no-scrollbar -mx-6 sm:mx-0 px-6 sm:px-0 items-stretch">
+          {Object.entries(pipelineData).map(([key, data], idx) => {
             const isActive = activeStage === key;
+            const accent = data.statusColor.match(/#[0-9a-fA-F]{6}/)?.[0] ?? "#00f2fe";
             return (
               <button
                 key={key}
                 onClick={() => setActiveStage(key)}
-                className={`p-3.5 sm:p-5 rounded-xl text-left border transition-all w-[230px] sm:w-auto shrink-0 snap-start ${isActive
-                  ? "bg-[#00f2fe]/10 border-[#00f2fe] shadow-[0_0_20px_rgba(0,242,254,0.25)]"
-                  : "bg-[#101018]/80 border-white/10 hover:border-white/30"
-                  }`}
+                style={
+                  isActive
+                    ? {
+                        borderColor: hexToRgba(accent, 0.7),
+                        background: hexToRgba(accent, 0.08),
+                        boxShadow: `0 0 26px ${hexToRgba(accent, 0.22)}, inset 0 1px 0 ${hexToRgba(accent, 0.25)}`,
+                      }
+                    : undefined
+                }
+                className={`group relative overflow-hidden rounded-xl p-3.5 sm:p-4 text-left border transition-all duration-300 w-[230px] sm:w-auto shrink-0 snap-start hover:-translate-y-0.5 ${
+                  isActive ? "" : "bg-[#101018]/70 border-white/10 hover:border-white/25"
+                }`}
               >
-                <div className="flex items-center gap-1.5 mb-1.5 sm:mb-2">
-                  <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${data.statusColor.replace('text-', 'bg-')} animate-pulse`} />
-                  <span className={`font-mono text-[9.5px] sm:text-[11px] font-bold uppercase tracking-wider ${data.statusColor}`}>
-                    {data.status}
+                {/* Top accent bar */}
+                <span
+                  className="pointer-events-none absolute top-0 left-0 right-0 h-[2px] transition-opacity duration-300"
+                  style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)`, opacity: isActive ? 1 : 0.25 }}
+                />
+
+                {/* Stage rail: numbered node + connector + status */}
+                <div className="flex items-center gap-2 mb-2.5">
+                  <span
+                    className="grid place-items-center w-6 h-6 rounded-full text-[10px] font-mono font-bold shrink-0 border transition-colors"
+                    style={{
+                      color: accent,
+                      borderColor: hexToRgba(accent, isActive ? 0.8 : 0.35),
+                      background: hexToRgba(accent, isActive ? 0.15 : 0.06),
+                    }}
+                  >
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className={`flex-1 min-w-[8px] h-[2px] rounded-full ${isActive ? "pipeline-rail-flow" : ""}`}
+                    style={
+                      isActive
+                        ? { backgroundImage: `repeating-linear-gradient(90deg, ${accent} 0 7px, transparent 7px 14px)`, backgroundSize: "14px 100%" }
+                        : { background: "rgba(255,255,255,0.08)" }
+                    }
+                  />
+                  <span className="flex items-center gap-1.5 shrink-0">
+                    <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: accent }} />
+                    <span className="font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider whitespace-nowrap" style={{ color: accent }}>
+                      {data.status}
+                    </span>
                   </span>
                 </div>
-                <div className="font-mono text-[13px] sm:text-sm font-bold text-white mb-0.5 sm:mb-1">{data.title}</div>
-                <div className="font-mono text-[10.5px] sm:text-xs text-white/50 mb-1 sm:mb-2">{data.date}</div>
-                <div className="font-mono text-[11px] sm:text-xs text-[#00f2fe] truncate">{data.role}</div>
+
+                {/* Title */}
+                <div className="font-mono text-[15px] sm:text-base font-bold text-white mb-0.5">{data.title}</div>
+                {/* Date */}
+                <div className="font-mono text-[10.5px] sm:text-[11px] text-white/45 mb-2">{data.date}</div>
+                {/* Role */}
+                <div className="font-mono text-[11px] sm:text-xs truncate" style={{ color: hexToRgba(accent, 0.9) }}>
+                  {data.role}
+                </div>
+
+                {/* Active stage points to the console output below */}
+                {isActive && (
+                  <div className="flex items-center gap-1.5 mt-2.5 font-mono text-[9px] font-bold uppercase tracking-wider" style={{ color: accent }}>
+                    <span className="animate-bounce">▼</span> tailing logs
+                  </div>
+                )}
               </button>
             );
           })}
