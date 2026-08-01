@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-dark: #0a0a0f;
+    --bg-card: rgba(16, 16, 24, 0.65);
+    --bg-terminal: #07070a;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-glow: rgba(0, 242, 254, 0.15);
+
+    /* Neon Accents */
+    --accent-blue: #00f2fe;
+    --accent-orange: #ff9900;
+    --accent-red: #ea4335;
+    --accent-green: #34a853;
+    --accent-purple: #9d4edd;
+    --accent-gold: #d4af37;
+
+    --font-display: var(--font-syne), 'Syne', sans-serif;
+    --font-serif: var(--font-cormorant), 'Cormorant Garamond', serif;
+    --font-cinzel: var(--font-cinzel), 'Cinzel', serif;
+    --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: #ffffff;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-syne), 'Syne', sans-serif;
+}
+
+@utility font-serif {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+}
+
+@utility font-cinzel {
+  font-family: var(--font-cinzel), 'Cinzel', serif;
+}
+
+@utility font-sans {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@utility font-mono {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Dedicated Exact Font Family Brand Logo Class */
+.logo-brand {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+/* Custom Pointer Cursor Ring & Follower Dot */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-blue, #00f2fe);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s, opacity 0.2s;
+  opacity: 1;
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s, height 0.25s, border-color 0.25s, background-color 0.25s, box-shadow 0.25s, opacity 0.2s;
+  opacity: 1;
+  will-change: transform;
+}
+
+/* Interactive Hover States for Cursor */
+.cursor-ring.hover-active {
+  width: 48px;
+  height: 48px;
+  border-color: #00f2fe;
+  background-color: rgba(0, 242, 254, 0.08);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+}
+
+.cursor-dot.hover-active {
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  box-shadow: 0 0 10px #00f2fe;
+}
+
+/* REMOVE CUSTOM CURSOR CIRCLE ON MOBILE DEVICES ONLY */
+@media (max-width: 640px) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* HIDE ALL SCROLLBARS ON MOBILE DEVICES ONLY */
+@media (max-width: 640px) {
+  /* Hide scrollbar for Chrome, Safari, Opera */
+  ::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  html, body, * {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+}
