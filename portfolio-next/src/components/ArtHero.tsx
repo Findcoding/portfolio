@@ -97,7 +97,7 @@ export default function ArtHero() {
           href="#featured-carousel"
           className="uiverse-glow-btn group relative inline-flex items-center justify-center whitespace-nowrap w-auto min-w-[190px] sm:min-w-[220px] px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl overflow-hidden bg-neutral-800 border border-white/20 hover:border-rose-300 text-gray-50 hover:text-rose-300 transition-all duration-500 font-mono text-xs sm:text-sm font-bold tracking-[2px] sm:tracking-[2.5px] uppercase"
         >
-          <span className="relative z-20 inline sm:hidden">EXPLORE</span>
+          <span className="relative z-20 inline sm:hidden">EXPLORE GALLERY</span>
           <span className="relative z-20 hidden sm:inline">EXPLORE GALLERY</span>
         </a>
 

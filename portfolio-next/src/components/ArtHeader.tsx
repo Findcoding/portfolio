@@ -21,21 +21,36 @@ export default function ArtHeader() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 font-sans text-[0.85rem] tracking-[1px] uppercase">
+        <nav className="hidden md:flex items-center gap-6 font-sans text-[0.78rem] tracking-[1px] uppercase">
           <a href="#hero" className="text-white/70 hover:text-white transition-colors">
-            Exhibition
+            EXHIBITION
           </a>
           <a href="#gallery" className="text-white/70 hover:text-white transition-colors">
-            Collection (12)
+            GALLERY (12)
           </a>
           <a href="#about" className="text-white/70 hover:text-white transition-colors">
-            About
+            ABOUT
           </a>
           <Link
             href="/portfolio"
-            className="text-[#00f2fe] border border-[#00f2fe]/30 px-4 py-1.5 rounded-full text-xs hover:bg-[#00f2fe]/15 hover:text-white hover:shadow-[0_0_15px_rgba(0,242,254,0.3)] transition-all font-sans"
+            className="group relative inline-flex items-center h-[2.05em] pl-[0.85em] pr-[2.55em] bg-[#00f2fe] text-[#070709] font-sans text-[0.72rem] font-bold tracking-[1px] uppercase rounded-[0.75em] border-none shadow-[0_0_12px_rgba(0,242,254,0.35)] overflow-hidden cursor-pointer no-underline select-none transition-all duration-300"
           >
-            Portfolio →
+            <span>PORTFOLIO</span>
+            <div className="absolute right-[0.18em] flex items-center justify-center h-[1.68em] w-[1.68em] ml-[0.7em] bg-[#070709] rounded-[0.6em] shadow-[0.1em_0.1em_0.4em_0.15em_rgba(0,242,254,0.3)] transition-all duration-300 group-hover:w-[calc(100%-0.36em)] group-active:scale-95 z-10">
+              <svg
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-[0.9em] h-[0.9em] text-[#00f2fe] transition-transform duration-300 group-hover:translate-x-[0.1em] shrink-0"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
           </Link>
         </nav>
 
@@ -62,7 +77,7 @@ export default function ArtHeader() {
           <a href="#hero" onClick={() => setMobileMenuOpen(false)} className="text-white/70 hover:text-white">Exhibition</a>
           <a href="#gallery" onClick={() => setMobileMenuOpen(false)} className="text-white/70 hover:text-white">Collection (12)</a>
           <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-white/70 hover:text-white">About</a>
-          <Link href="/" className="text-[#00f2fe] font-bold">Portfolio →</Link>
+          <Link href="/portfolio" onClick={() => setMobileMenuOpen(false)} className="text-[#00f2fe] font-bold">PORTFOLIO →</Link>
         </div>
       )}
     </header>

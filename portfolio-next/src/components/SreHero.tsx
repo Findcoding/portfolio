@@ -479,7 +479,7 @@ export default function SreHero() {
         </div>
 
         {/* Main Name Heading */}
-        <div className="flex items-center justify-center gap-3 mb-1.5 sm:mb-3">
+        <div className="flex items-center justify-center gap-3 mb-1.5 sm:mb-2.5">
           <h1 className="logo-brand text-3xl xs:text-4xl sm:text-6xl lg:text-7xl text-white tracking-wider font-bold">
             BIJΣПDΛЯ PЯΛƧΛD
           </h1>

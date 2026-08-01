@@ -17,26 +17,41 @@ export default function SreNavbar() {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-6 font-mono text-xs text-white/70 tracking-wider">
-          <a href="#about" className="hover:text-[#00f2fe] transition-colors">About</a>
-          <a href="#pipeline" className="hover:text-[#00f2fe] transition-colors">Experience</a>
-          <a href="#education" className="hover:text-[#00f2fe] transition-colors">Education</a>
-          <a href="#skills" className="hover:text-[#00f2fe] transition-colors">Tech Stack</a>
-          <a href="#certifications" className="hover:text-[#00f2fe] transition-colors">Certifications</a>
-          <a href="#terminal" className="hover:text-[#00f2fe] transition-colors">Terminal</a>
-          <a href="#projects" className="hover:text-[#00f2fe] transition-colors">Projects</a>
+        <div className="hidden lg:flex items-center gap-5 font-sans text-[0.78rem] tracking-[1px] uppercase">
+          <a href="#about" className="text-white/70 hover:text-[#00f2fe] transition-colors">ABOUT</a>
+          <a href="#pipeline" className="text-white/70 hover:text-[#00f2fe] transition-colors">EXPERIENCE</a>
+          <a href="#education" className="text-white/70 hover:text-[#00f2fe] transition-colors">EDUCATION</a>
+          <a href="#skills" className="text-white/70 hover:text-[#00f2fe] transition-colors">TECH STACK</a>
+          <a href="#certifications" className="text-white/70 hover:text-[#00f2fe] transition-colors">CERTIFICATIONS</a>
+          <a href="#terminal" className="text-white/70 hover:text-[#00f2fe] transition-colors">TERMINAL</a>
+          <a href="#projects" className="text-white/70 hover:text-[#00f2fe] transition-colors">PROJECTS</a>
           <Link
             href="/"
-            className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#00f2fe]/20 to-[#4facfe]/20 border border-[#00f2fe]/40 text-white hover:border-[#00f2fe] hover:shadow-[0_0_15px_rgba(0,242,254,0.3)] transition-all font-bold"
+            className="group relative inline-flex items-center h-[2.05em] pl-[0.85em] pr-[2.55em] bg-[#00f2fe] text-[#070709] font-sans text-[0.72rem] font-bold tracking-[1px] uppercase rounded-[0.75em] border-none shadow-[0_0_12px_rgba(0,242,254,0.35)] overflow-hidden cursor-pointer no-underline select-none transition-all duration-300"
           >
-            Artworks 📷
+            <span>ARTWORKS</span>
+            <div className="absolute right-[0.18em] flex items-center justify-center h-[1.68em] w-[1.68em] ml-[0.7em] bg-[#070709] rounded-[0.6em] shadow-[0.1em_0.1em_0.4em_0.15em_rgba(0,242,254,0.3)] transition-all duration-300 group-hover:w-[calc(100%-0.36em)] group-active:scale-95 z-10">
+              <svg
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-[0.9em] h-[0.9em] text-[#00f2fe] transition-transform duration-300 group-hover:translate-x-[0.1em] shrink-0"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
           </Link>
         </div>
 
         {/* Mobile Hamburger Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-white p-2 focus:outline-none"
+          className="lg:hidden text-white p-2 focus:outline-none"
           aria-label="Toggle menu"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,7 +66,7 @@ export default function SreNavbar() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0a0a0f] px-6 py-4 flex flex-col gap-4 font-mono text-sm text-white/80">
+        <div className="lg:hidden bg-[#0a0a0f] px-6 py-4 flex flex-col gap-4 font-mono text-sm text-white/80">
           <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#00f2fe]">Dashboard</a>
           <a href="#pipeline" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#00f2fe]">Pipeline</a>
           <a href="#education" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#00f2fe]">Education</a>
