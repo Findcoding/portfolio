@@ -304,7 +304,7 @@ Target availability score: 99.9982% uptime maintained.`}
           {/* Terminal Output Window */}
           <div
             ref={terminalBoxRef}
-            className="p-6 font-mono text-xs sm:text-sm text-[#e2e8f0] min-h-[340px] max-h-[440px] overflow-y-auto space-y-3"
+            className="p-6 font-mono text-xs sm:text-sm text-[#e2e8f0] min-h-[340px] max-h-[440px] overflow-y-auto overscroll-y-auto space-y-3"
           >
             <div className="text-white/70 space-y-1 pb-3 border-b border-white/10">
               <p>Welcome to Bijendar&apos;s SRE Shell (v1.4.2-static)</p>

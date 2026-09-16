@@ -80,28 +80,38 @@ export default function SreCertifications() {
         {showAll ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-8">
             {certificationsList.map((cert, idx) => (
-              <div
+              <a
                 key={`static-${idx}`}
-                className="p-4 sm:p-5 rounded-xl bg-[#101018]/90 border border-white/10 hover:border-[#00f2fe]/60 transition-all flex items-start gap-3.5 shadow-lg group/cert"
+                href={cert.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/cert relative overflow-hidden rounded-xl bg-[#0d0d15]/90 border border-white/10 hover:border-[#00f2fe]/70 hover:shadow-[0_0_25px_rgba(0,242,254,0.18)] transition-all duration-300 p-3.5 sm:p-4 flex items-center gap-3.5 no-underline cursor-pointer select-none"
               >
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#00f2fe]/10 border border-[#00f2fe]/30 flex items-center justify-center text-lg sm:text-xl shrink-0">
+                {/* Top Accent Light Beam */}
+                <span className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00f2fe]/0 to-transparent group-hover/cert:via-[#00f2fe]/80 transition-all duration-500" />
+
+                {/* Left Tech Badge Icon */}
+                <div className="w-10 h-10 rounded-lg bg-[#00f2fe]/10 border border-[#00f2fe]/30 flex items-center justify-center text-xl shrink-0 group-hover/cert:border-[#00f2fe] group-hover/cert:scale-105 group-hover/cert:shadow-[0_0_15px_rgba(0,242,254,0.35)] transition-all duration-300">
                   {cert.badge}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-mono text-[11.5px] sm:text-xs font-bold text-white leading-snug mb-1">
-                    <a
-                      href={cert.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-[#00f2fe] transition-colors inline-flex items-center gap-1 max-w-full"
-                    >
-                      <span>{cert.name}</span>
-                      <span className="text-[#00f2fe] shrink-0">↗</span>
-                    </a>
+
+                {/* Center Details */}
+                <div className="flex-1 min-w-0 pr-1">
+                  <h3 className="font-mono text-xs sm:text-[13px] font-bold text-white group-hover/cert:text-[#00f2fe] transition-colors truncate leading-snug" title={cert.name}>
+                    {cert.name}
                   </h3>
-                  <p className="font-mono text-[10.5px] sm:text-[11px] text-white/50">{cert.issuer}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="font-mono text-[10.5px] text-white/50 truncate">{cert.issuer}</span>
+                  </div>
                 </div>
-              </div>
+
+                {/* Right Link Button */}
+                <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 group-hover/cert:border-[#00f2fe] group-hover/cert:bg-[#00f2fe] text-white/50 group-hover/cert:text-[#070709] flex items-center justify-center transition-all duration-300 shrink-0 ml-auto">
+                  <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </div>
+              </a>
             ))}
           </div>
         ) : (
@@ -123,28 +133,38 @@ export default function SreCertifications() {
               style={{ animationPlayState: isPaused ? "paused" : "running" }}
             >
               {[...row1, ...row1].map((cert, idx) => (
-                <div
+                <a
                   key={`r1-${idx}`}
-                  className="p-4 sm:p-5 rounded-xl bg-[#101018]/90 border border-white/10 hover:border-[#00f2fe]/60 transition-all flex items-start gap-3.5 w-[290px] sm:w-[350px] shrink-0 shadow-lg group/cert"
+                  href={cert.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/cert relative overflow-hidden rounded-xl bg-[#0d0d15]/90 border border-white/10 hover:border-[#00f2fe]/70 hover:shadow-[0_0_25px_rgba(0,242,254,0.18)] transition-all duration-300 p-3.5 sm:p-4 flex items-center gap-3.5 w-[300px] sm:w-[360px] shrink-0 no-underline cursor-pointer select-none"
                 >
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#00f2fe]/10 border border-[#00f2fe]/30 flex items-center justify-center text-lg sm:text-xl shrink-0">
+                  {/* Top Accent Light Beam */}
+                  <span className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00f2fe]/0 to-transparent group-hover/cert:via-[#00f2fe]/80 transition-all duration-500" />
+
+                  {/* Left Tech Badge Icon */}
+                  <div className="w-10 h-10 rounded-lg bg-[#00f2fe]/10 border border-[#00f2fe]/30 flex items-center justify-center text-xl shrink-0 group-hover/cert:border-[#00f2fe] group-hover/cert:scale-105 group-hover/cert:shadow-[0_0_15px_rgba(0,242,254,0.35)] transition-all duration-300">
                     {cert.badge}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-mono text-[11.5px] sm:text-xs font-bold text-white leading-snug mb-1 truncate" title={cert.name}>
-                      <a
-                        href={cert.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-[#00f2fe] transition-colors inline-flex items-center gap-1 max-w-full"
-                      >
-                        <span className="truncate">{cert.name}</span>
-                        <span className="text-[#00f2fe] shrink-0">↗</span>
-                      </a>
+
+                  {/* Center Details */}
+                  <div className="flex-1 min-w-0 pr-1">
+                    <h3 className="font-mono text-xs sm:text-[13px] font-bold text-white group-hover/cert:text-[#00f2fe] transition-colors truncate leading-snug" title={cert.name}>
+                      {cert.name}
                     </h3>
-                    <p className="font-mono text-[10.5px] sm:text-[11px] text-white/50 truncate">{cert.issuer}</p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="font-mono text-[10.5px] text-white/50 truncate">{cert.issuer}</span>
+                    </div>
                   </div>
-                </div>
+
+                  {/* Right Link Button */}
+                  <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 group-hover/cert:border-[#00f2fe] group-hover/cert:bg-[#00f2fe] text-white/50 group-hover/cert:text-[#070709] flex items-center justify-center transition-all duration-300 shrink-0 ml-auto">
+                    <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </div>
+                </a>
               ))}
             </div>
 
@@ -154,28 +174,38 @@ export default function SreCertifications() {
               style={{ animationPlayState: isPaused ? "paused" : "running" }}
             >
               {[...row2, ...row2].map((cert, idx) => (
-                <div
+                <a
                   key={`r2-${idx}`}
-                  className="p-4 sm:p-5 rounded-xl bg-[#101018]/90 border border-white/10 hover:border-[#00f2fe]/60 transition-all flex items-start gap-3.5 w-[290px] sm:w-[350px] shrink-0 shadow-lg group/cert"
+                  href={cert.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/cert relative overflow-hidden rounded-xl bg-[#0d0d15]/90 border border-white/10 hover:border-[#00f2fe]/70 hover:shadow-[0_0_25px_rgba(0,242,254,0.18)] transition-all duration-300 p-3.5 sm:p-4 flex items-center gap-3.5 w-[300px] sm:w-[360px] shrink-0 no-underline cursor-pointer select-none"
                 >
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#00f2fe]/10 border border-[#00f2fe]/30 flex items-center justify-center text-lg sm:text-xl shrink-0">
+                  {/* Top Accent Light Beam */}
+                  <span className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00f2fe]/0 to-transparent group-hover/cert:via-[#00f2fe]/80 transition-all duration-500" />
+
+                  {/* Left Tech Badge Icon */}
+                  <div className="w-10 h-10 rounded-lg bg-[#00f2fe]/10 border border-[#00f2fe]/30 flex items-center justify-center text-xl shrink-0 group-hover/cert:border-[#00f2fe] group-hover/cert:scale-105 group-hover/cert:shadow-[0_0_15px_rgba(0,242,254,0.35)] transition-all duration-300">
                     {cert.badge}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-mono text-[11.5px] sm:text-xs font-bold text-white leading-snug mb-1 truncate" title={cert.name}>
-                      <a
-                        href={cert.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-[#00f2fe] transition-colors inline-flex items-center gap-1 max-w-full"
-                      >
-                        <span className="truncate">{cert.name}</span>
-                        <span className="text-[#00f2fe] shrink-0">↗</span>
-                      </a>
+
+                  {/* Center Details */}
+                  <div className="flex-1 min-w-0 pr-1">
+                    <h3 className="font-mono text-xs sm:text-[13px] font-bold text-white group-hover/cert:text-[#00f2fe] transition-colors truncate leading-snug" title={cert.name}>
+                      {cert.name}
                     </h3>
-                    <p className="font-mono text-[10.5px] sm:text-[11px] text-white/50 truncate">{cert.issuer}</p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="font-mono text-[10.5px] text-white/50 truncate">{cert.issuer}</span>
+                    </div>
                   </div>
-                </div>
+
+                  {/* Right Link Button */}
+                  <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 group-hover/cert:border-[#00f2fe] group-hover/cert:bg-[#00f2fe] text-white/50 group-hover/cert:text-[#070709] flex items-center justify-center transition-all duration-300 shrink-0 ml-auto">
+                    <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </div>
+                </a>
               ))}
             </div>
 

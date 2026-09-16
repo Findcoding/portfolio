@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero — Floating Tech-Stack Logo Constellation (standalone)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- ============================================================
+         CSS  (self-contained copy of the hero styles)
+    ============================================================ -->
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --accent-blue: #00f2fe;
+            --text-light: #e6edf3;
+            --text-muted: #8b98a5;
+            --font-mono: 'Fira Code', monospace;
+            --font-sans: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+        }
+
+        /* Subtle background glow so the hero doesn't feel flat */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(600px circle at 20% 20%, rgba(0, 242, 254, 0.08), transparent 40%),
+                radial-gradient(600px circle at 80% 70%, rgba(157, 78, 221, 0.08), transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            /* mouse events handled on .hero-section */
+            z-index: 1;
+            /* sits behind .hero-container (z-index: 2) */
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            margin-bottom: 30px;
+            letter-spacing: 0.05em;
+        }
+
+        .status-indicator {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #2ecc71;
+            box-shadow: 0 0 8px #2ecc71;
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 7vw, 4.6rem);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            font-weight: 500;
+            color: var(--accent-blue);
+            margin-bottom: 22px;
+        }
+
+        .hero-tagline {
+            max-width: 620px;
+            margin: 0 auto 34px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .badge {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-light);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ============================================================
+         HTML  (hero section markup)
+    ============================================================ -->
+    <section id="home" class="hero-section">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-container">
+            <div class="hero-status">
+                <span class="status-indicator"></span>
+                <span class="status-text">SYSTEM STATUS: OPERATIONAL</span>
+            </div>
+
+            <h1 class="hero-title">BIJΣПDΛЯ PЯΛƧΛD <span>＼⍩⃝／</span></h1>
+            <h2 class="hero-subtitle">Site Reliability &amp; DevOps Engineer</h2>
+            <p class="hero-tagline">
+                Architecting scalable, resilient, and highly available multi-cloud systems.
+                Turning deployment pipelines into fine-tuned engines.
+            </p>
+
+            <div class="hero-badges">
+                <span class="badge">AWS</span>
+                <span class="badge">Azure</span>
+                <span class="badge">GCP</span>
+                <span class="badge">Kubernetes</span>
+                <span class="badge">Terraform</span>
+                <span class="badge">Docker</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         JS  (Floating Tech-Stack Logo Constellation)
+    ============================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', initSkillLogoField);
+
+        // Floating Tech-Stack Logo Constellation for the Hero Background.
+        // Each skill from the "Technical Inventory" section drifts in a frosted-glass
+        // chip with a brand-coloured glow, repels away from the cursor (antigravity),
+        // scales up on hover and links to nearby chips with faint network lines.
+        function initSkillLogoField() {
+            const canvas = document.getElementById('hero-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const heroSection = document.getElementById('home');
+            if (!heroSection) return;
+
+            // --- Logo pool (sources verified reachable) ---------------------------
+            // Cloud trio uses devicon (full colour); everything else uses simple-icons
+            // brand-coloured glyphs. `color` drives the chip glow / border / links.
+            const si = (slug, tint) => `https://cdn.simpleicons.org/${slug}${tint ? '/' + tint : ''}`;
+            const dev = (path) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${path}.svg`;
+
+            const LOGOS = [
+                // Cloud Platforms
+                { name: 'AWS', color: '#FF9900', src: dev('amazonwebservices/amazonwebservices-original-wordmark') },
+                { name: 'Azure', color: '#3AA0E3', src: dev('azure/azure-original') },
+                { name: 'GCP', color: '#4285F4', src: dev('googlecloud/googlecloud-original') },
+                // Orchestration & Containers
+                { name: 'Kubernetes', color: '#3D6CE7', src: si('kubernetes') },
+                { name: 'Docker', color: '#2496ED', src: si('docker') },
+                { name: 'Helm', color: '#5B8DEF', src: si('helm', '5B8DEF') },
+                { name: 'Nginx', color: '#37B24D', src: si('nginx') },
+                // IaC & DevOps
+                { name: 'Terraform', color: '#844FBA', src: si('terraform') },
+                { name: 'Ansible', color: '#EE0000', src: si('ansible', 'FF3B3B') },
+                { name: 'Jenkins', color: '#D24939', src: si('jenkins', 'E15C4B') },
+                { name: 'GitHub Actions', color: '#2E8BFF', src: si('githubactions') },
+                { name: 'GitLab', color: '#FC6D26', src: si('gitlab') },
+                { name: 'ArgoCD', color: '#EF7B4D', src: si('argo') },
+                // Monitoring & Security
+                { name: 'Prometheus', color: '#E6522C', src: si('prometheus') },
+                { name: 'Grafana', color: '#F46800', src: si('grafana') },
+                { name: 'Elasticsearch', color: '#FEC514', src: si('elasticsearch', 'FEC514') },
+                { name: 'Vault', color: '#FFD814', src: si('vault', 'FFE45E') },
+                { name: 'SonarQube', color: '#4E9BCD', src: si('sonarqubeserver', '5FB0E0') },
+                // Languages & Frameworks
+                { name: 'Python', color: '#4B8BBE', src: si('python', '5DA9E0') },
+                { name: 'JavaScript', color: '#F7DF1E', src: si('javascript') },
+                { name: 'Node.js', color: '#5FA04E', src: si('nodedotjs', '7CC167') },
+                { name: 'React', color: '#61DAFB', src: si('react') },
+                { name: 'Bash', color: '#57C038', src: si('gnubash', '7BD65C') },
+                // Databases & Streaming
+                { name: 'MySQL', color: '#4479A1', src: si('mysql', '6FA8D6') },
+                { name: 'PostgreSQL', color: '#4169E1', src: si('postgresql', '6E8FF0') },
+                { name: 'MongoDB', color: '#47A248', src: si('mongodb', '5CC15D') },
+                { name: 'Redis', color: '#FF4438', src: si('redis', 'FF6156') },
+                { name: 'Kafka', color: '#C9CDD3', src: si('apachekafka', 'E6E9EE') },
+                { name: 'Spark', color: '#E25A1C', src: si('apachespark') },
+                { name: 'Airflow', color: '#2AA5EE', src: si('apacheairflow', '2AA5EE') }
+            ];
+
+            const prefersReduced = window.matchMedia &&
+                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // --- Sizing / physics tunables ----------------------------------------
+            let W = 0, H = 0, dpr = 1;
+            const connectionDistance = 165;
+            const repulsionRadius = 150;
+            const repulsionStrength = 2.6;
+            const gravityForce = -0.014;      // gentle upward float
+
+            const mouse = { x: null, y: null };
+
+            function resizeCanvas() {
+                const rect = heroSection.getBoundingClientRect();
+                W = rect.width;
+                H = rect.height;
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = Math.round(W * dpr);
+                canvas.height = Math.round(H * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // work in CSS pixels
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+            heroSection.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            // Preload logo images; any that fail simply stay hidden (broken flag).
+            function loadImage(def) {
+                const img = new Image();
+                img.decoding = 'async';
+                img.loaded = false;
+                img.broken = false;
+                img.onload = () => { img.loaded = true; };
+                img.onerror = () => { img.broken = true; };
+                img.src = def.src;
+                return img;
+            }
+
+            function roundRect(x, y, w, h, r) {
+                if (ctx.roundRect) {
+                    ctx.beginPath();
+                    ctx.roundRect(x, y, w, h, r);
+                    return;
+                }
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.arcTo(x + w, y, x + w, y + h, r);
+                ctx.arcTo(x + w, y + h, x, y + h, r);
+                ctx.arcTo(x, y + h, x, y, r);
+                ctx.arcTo(x, y, x + w, y, r);
+                ctx.closePath();
+            }
+
+            function hexToRgba(hex, a) {
+                const n = parseInt(hex.slice(1), 16);
+                return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${a})`;
+            }
+
+            // --- Chip model --------------------------------------------------------
+            class LogoChip {
+                constructor(def) {
+                    this.def = def;
+                    this.img = loadImage(def);
+                    this.scale = 1;
+                    this.reset(true);
+                }
+
+                reset(randomY = false) {
+                    this.depth = Math.random();                 // 0 = far, 1 = near
+                    this.size = 32 + this.depth * 27;            // 32 → 59 px chip
+                    this.alpha = 0.55 + this.depth * 0.4;
+                    this.speed = 0.55 + this.depth * 0.75;       // parallax
+                    this.x = Math.random() * W;
+                    this.y = randomY ? Math.random() * H : H + this.size;
+                    this.vx = (Math.random() - 0.5) * 0.4;
+                    this.vy = (Math.random() - 0.8) * 0.4;
+                    this.phase = Math.random() * Math.PI * 2;    // desync the wave
+                }
+
+                update() {
+                    this.x += this.vx * this.speed;
+                    this.y += this.vy * this.speed;
+
+                    this.vx *= 0.97;
+                    this.vy *= 0.97;
+
+                    this.vy += gravityForce;
+                    this.vx += Math.sin((Date.now() / 900) + this.phase + this.y * 0.012) * 0.006;
+
+                    // Hover proximity → scale-up + glow boost, plus antigravity push
+                    let target = 1;
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = this.x - mouse.x;
+                        const dy = this.y - mouse.y;
+                        const dist = Math.hypot(dx, dy) || 0.001;
+                        if (dist < repulsionRadius) {
+                            const force = (repulsionRadius - dist) / repulsionRadius;
+                            this.vx += (dx / dist) * force * repulsionStrength;
+                            this.vy += (dy / dist) * force * repulsionStrength;
+                        }
+                        if (dist < 130) target = 1.22;
+                    }
+                    this.scale += (target - this.scale) * 0.12;
+
+                    if (this.y < -this.size) this.reset(false);
+                    if (this.x < -this.size) this.x = W + this.size;
+                    else if (this.x > W + this.size) this.x = -this.size;
+                }
+
+                draw() {
+                    if (!this.img.loaded || this.img.broken) return;
+
+                    const s = this.size * this.scale;
+                    const x = this.x, y = this.y;
+                    const hot = this.scale > 1.05;
+
+                    ctx.save();
+                    ctx.globalAlpha = this.alpha;
+
+                    // Frosted-glass chip with brand glow
+                    ctx.shadowColor = hexToRgba(this.def.color, hot ? 0.85 : 0.5);
+                    ctx.shadowBlur = hot ? 30 : 16;
+                    roundRect(x - s / 2, y - s / 2, s, s, s * 0.28);
+                    ctx.fillStyle = 'rgba(13, 20, 33, 0.55)';
+                    ctx.fill();
+
+                    ctx.shadowBlur = 0;
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = hexToRgba(this.def.color, hot ? 0.9 : 0.45);
+                    ctx.stroke();
+
+                    // Logo, padded inside the chip
+                    const pad = s * 0.24;
+                    ctx.globalAlpha = this.alpha;
+                    ctx.drawImage(this.img, x - s / 2 + pad, y - s / 2 + pad, s - pad * 2, s - pad * 2);
+                    ctx.restore();
+                }
+            }
+
+            // Fewer chips on small screens to keep it airy and performant.
+            let pool = LOGOS;
+            if (W < 560) pool = LOGOS.filter((_, i) => i % 3 === 0);
+            else if (W < 900) pool = LOGOS.filter((_, i) => i % 2 === 0);
+
+            const chips = pool.map((def) => new LogoChip(def));
+
+            function animate() {
+                ctx.clearRect(0, 0, W, H);
+
+                // Network links between nearby chips (drawn under the chips)
+                for (let i = 0; i < chips.length; i++) {
+                    for (let j = i + 1; j < chips.length; j++) {
+                        const dx = chips[i].x - chips[j].x;
+                        const dy = chips[i].y - chips[j].y;
+                        const dist = Math.hypot(dx, dy);
+                        if (dist < connectionDistance) {
+                            const a = (1 - dist / connectionDistance) * 0.14;
+                            ctx.beginPath();
+                            ctx.moveTo(chips[i].x, chips[i].y);
+                            ctx.lineTo(chips[j].x, chips[j].y);
+                            ctx.strokeStyle = `rgba(0, 242, 254, ${a})`;
+                            ctx.lineWidth = 0.7;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                for (let i = 0; i < chips.length; i++) {
+                    if (!prefersReduced) chips[i].update();
+                    chips[i].draw();
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            // 3D Parallax Tilt effect on the Hero container content
+            const heroContainer = document.querySelector('.hero-container');
+            if (heroContainer) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    const cx = rect.width / 2;
+                    const cy = rect.height / 2;
+                    const dx = (e.clientX - rect.left - cx) / cx;
+                    const dy = (e.clientY - rect.top - cy) / cy;
+
+                    // Tilts up to 7 degrees, translates up to 8px
+                    heroContainer.style.transform = `perspective(1000px) rotateY(${dx * 7}deg) rotateX(${-dy * 7}deg) translateZ(8px)`;
+                    heroContainer.style.transition = 'none';
+                });
+
+                heroSection.addEventListener('mouseleave', () => {
+                    heroContainer.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0deg)';
+                    heroContainer.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

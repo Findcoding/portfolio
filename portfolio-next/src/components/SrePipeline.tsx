@@ -233,7 +233,7 @@ export default function SrePipeline() {
 
           <div
             ref={logsContainerRef}
-            className="p-4 sm:p-6 font-mono text-[11px] sm:text-xs text-white/90 space-y-3.5 sm:space-y-2.5 max-h-[300px] sm:max-h-[360px] overflow-y-auto overscroll-contain scroll-smooth"
+            className="p-4 sm:p-6 font-mono text-[11px] sm:text-xs text-white/90 space-y-3.5 sm:space-y-2.5 min-h-[220px]"
           >
             {displayedLogs.map((log, idx) => {
               if (!log) return null;

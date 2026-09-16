@@ -271,19 +271,51 @@ export default function GalleryGrid({ onOpenLightbox }: GalleryGridProps) {
 
         {/* Load More Button - Compact top & bottom spacing on mobile */}
         {categoryFiltered.length > 9 && (
-          <div className="flex justify-center mt-3 mb-2 sm:mt-10 sm:mb-8">
+          <div className="flex justify-center mt-2.5 mb-2 sm:mt-4 sm:mb-4">
             <button
               onClick={handleLoadMore}
-              className="font-sans text-[10px] sm:text-xs font-bold tracking-[1.5px] sm:tracking-widest px-3.5 py-1.5 sm:px-8 sm:py-3.5 rounded-full bg-[#00f2fe]/15 border border-[#00f2fe]/40 text-white transition-all hover:bg-[#00f2fe]/30 hover:border-[#00f2fe] hover:shadow-[0_0_20px_rgba(0,242,254,0.3)] transform hover:-translate-y-0.5"
+              className="group relative inline-flex items-center justify-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-[#00f2fe] hover:bg-black text-[#070709] hover:text-white font-sans text-[10.5px] sm:text-xs font-bold tracking-[1.2px] sm:tracking-widest uppercase border border-[#00f2fe] shadow-[0_0_12px_rgba(0,242,254,0.25)] transition-all duration-300 cursor-pointer select-none active:scale-95 whitespace-nowrap"
             >
-              {hasMore ? (
-                <>
-                  <span className="inline sm:hidden">SHOW MORE ({visibleItems.length}/{categoryFiltered.length}) ↓</span>
-                  <span className="hidden sm:inline">SHOW MORE ({visibleItems.length} OF {categoryFiltered.length}) ↓</span>
-                </>
-              ) : (
-                "SHOW LESS ↑"
-              )}
+              <span>
+                {hasMore ? "SHOW MORE" : "SHOW LESS"}
+              </span>
+
+              {/* Animated Icon Circle Wrapper on Right */}
+              <span className="shrink-0 w-[18px] h-[18px] sm:w-5 sm:h-5 relative rounded bg-[#070709] group-hover:bg-[#00f2fe] text-[#00f2fe] group-hover:text-[#070709] flex items-center justify-center overflow-hidden transition-colors duration-300">
+                {/* Primary Arrow (Flies out down on hover) */}
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-2.5 h-2.5 transition-transform duration-300 group-hover:translate-y-full group-hover:opacity-0"
+                >
+                  {hasMore ? (
+                    <path d="M12 5v14M19 12l-7 7-7-7" />
+                  ) : (
+                    <path d="M12 19V5M5 12l7-7 7 7" />
+                  )}
+                </svg>
+
+                {/* Copy Arrow (Flies in from top into position on hover) */}
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-2.5 h-2.5 absolute -translate-y-full opacity-0 transition-all duration-300 delay-75 group-hover:translate-y-0 group-hover:opacity-100"
+                >
+                  {hasMore ? (
+                    <path d="M12 5v14M19 12l-7 7-7-7" />
+                  ) : (
+                    <path d="M12 19V5M5 12l7-7 7 7" />
+                  )}
+                </svg>
+              </span>
             </button>
           </div>
         )}
